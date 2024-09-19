@@ -1,5 +1,5 @@
 <h1 align="center">The Chemist's Way
-<img src="characters/players/tony/sprites/idle/idle.png" height="32"/></h1>
+<img src="img/tony.png" height="70"/></h1>
 <h3 align="center">Погрузись в мир химических уравнений</h3>
 
 Игра сделана на игровом движке [Godot Engine](https://godotengine.org/) на конкурс [Начни Игру](https://startgame.rsv.ru/)
