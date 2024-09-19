@@ -5,7 +5,7 @@
 Игра сделана на игровом движке [Godot Engine](https://godotengine.org/) на конкурс [Начни Игру](https://startgame.rsv.ru/)
 
 ## Разработчики
-[Logo команды](img/team_logo.png)
+![Logo команды](img/team_logo.png)
 droyti - тимлид, программист \
 Bitmann - программист \
 Astatine - 2D художник \
