@@ -1,0 +1,3 @@
+Оставим тут ссылки на используемые в игре шейдеры:
+	
+God rays: https://godotshaders.com/shader/god-rays/

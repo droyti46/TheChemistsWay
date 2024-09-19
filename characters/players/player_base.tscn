@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c01a66ufjqjo2"]
+
+[ext_resource type="Texture2D" uid="uid://cy10kt6glh0lo" path="res://characters/players/tony/sprites/idle/idle.png" id="1_npbt8"]
+[ext_resource type="Script" path="res://characters/players/player_base.gd" id="1_q6ido"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qh1o4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_npbt8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5cap7"]
+size = Vector2(68, 92)
+
+[node name="PlayerBase" type="CharacterBody2D"]
+script = ExtResource("1_q6ido")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_qh1o4")
+animation = &"idle"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(6, 10)
+shape = SubResource("RectangleShape2D_5cap7")

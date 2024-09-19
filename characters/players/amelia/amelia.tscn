@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://1xebd5o0bl1o"]
+
+[ext_resource type="PackedScene" uid="uid://c01a66ufjqjo2" path="res://characters/players/player_base.tscn" id="1_h8odx"]
+[ext_resource type="Texture2D" uid="uid://bu5sacnw72amh" path="res://characters/players/amelia/sprites/idle/idle.png" id="2_t2r1w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r6p6d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_t2r1w")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Amelia" instance=ExtResource("1_h8odx")]
+
+[node name="AnimatedSprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_r6p6d")
