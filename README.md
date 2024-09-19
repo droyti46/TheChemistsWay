@@ -1,11 +1,11 @@
 <h1 align="center">The Chemist's Way
-<img src="img/tony.png" height="70"/></h1>
+<img src="img/tony.png" height="30"/></h1>
 <h3 align="center">Погрузись в мир химических реакций 🧪</h3>
 
 Игра сделана на игровом движке [Godot Engine](https://godotengine.org/) на конкурс [Начни Игру](https://startgame.rsv.ru/)
 
 ## Разработчики
-<img src="img/team_logo.png" height="160" align="center"/>
+[Logo команды](img/team_logo.png)
 droyti - тимлид, программист \
 Bitmann - программист \
 Astatine - 2D художник \
