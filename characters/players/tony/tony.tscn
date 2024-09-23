@@ -1,5 +1,71 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhvmkddx2sdfn"]
+[gd_scene load_steps=11 format=3 uid="uid://bhvmkddx2sdfn"]
 
 [ext_resource type="PackedScene" uid="uid://c01a66ufjqjo2" path="res://characters/players/player_base.tscn" id="1_n6wql"]
+[ext_resource type="Script" path="res://characters/players/tony/tony.gd" id="2_k3v2w"]
+[ext_resource type="Texture2D" uid="uid://d4mdf812sv0j0" path="res://characters/players/tony/sprites/side/craft/craft_side.png" id="3_n37v6"]
+[ext_resource type="Texture2D" uid="uid://dqqegmem1gonw" path="res://characters/players/tony/sprites/behind/idle/idle_behind.png" id="4_kn2rt"]
+[ext_resource type="Texture2D" uid="uid://dlq0bt3cruy1p" path="res://characters/players/tony/sprites/side/idle/idle_side.png" id="5_7msvy"]
+[ext_resource type="Texture2D" uid="uid://dnp8cth0to1v8" path="res://characters/players/tony/sprites/behind/step/step_behind1.png" id="6_n3kww"]
+[ext_resource type="Texture2D" uid="uid://c5x4vubolo0j8" path="res://characters/players/tony/sprites/behind/step/step_behind2.png" id="7_hsvhd"]
+[ext_resource type="Texture2D" uid="uid://o02f4a8xo820" path="res://characters/players/tony/sprites/side/step/step_side1.png" id="8_bpdg7"]
+[ext_resource type="Texture2D" uid="uid://chadpcu2nr32m" path="res://characters/players/tony/sprites/side/step/step_side2.png" id="9_qp1kp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_akkvu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_n37v6")
+}],
+"loop": true,
+"name": &"craft_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_kn2rt")
+}],
+"loop": true,
+"name": &"idle_behind",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_7msvy")
+}],
+"loop": true,
+"name": &"idle_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_n3kww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_hsvhd")
+}],
+"loop": true,
+"name": &"step_behind",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_bpdg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_qp1kp")
+}],
+"loop": true,
+"name": &"step_side",
+"speed": 5.0
+}]
 
 [node name="Tony" instance=ExtResource("1_n6wql")]
+collision_mask = 14
+script = ExtResource("2_k3v2w")
+
+[node name="AnimatedSprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_akkvu")
+frame_progress = 0.0
+
+[node name="Collision" parent="." index="1"]
+position = Vector2(5, -20)

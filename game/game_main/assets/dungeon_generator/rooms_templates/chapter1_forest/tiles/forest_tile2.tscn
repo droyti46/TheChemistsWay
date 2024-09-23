@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4qtfhxvr3wf6"]
+
+[ext_resource type="PackedScene" uid="uid://dr10dt5pvg5wb" path="res://game/game_main/assets/dungeon_generator/rooms_templates/tile_base.tscn" id="1_hqesg"]
+[ext_resource type="Texture2D" uid="uid://c3tfhgijewqiy" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/tiles/sprites/forest_tile2.png" id="2_1eicj"]
+
+[node name="TileBase" instance=ExtResource("1_hqesg")]
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(4, 4)
+texture = ExtResource("2_1eicj")

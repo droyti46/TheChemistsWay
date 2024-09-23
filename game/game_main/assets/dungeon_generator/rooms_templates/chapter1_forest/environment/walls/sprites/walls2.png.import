@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy10kt6glh0lo"
-path="res://.godot/imported/idle.png-e3f76d64cc6bf107944124f3d05d2a96.ctex"
+uid="uid://ce3xpuo2bosx6"
+path="res://.godot/imported/walls2.png-6f2b31f700b6c8f52c499e2c1b0af2d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/players/tony/sprites/idle/idle.png"
-dest_files=["res://.godot/imported/idle.png-e3f76d64cc6bf107944124f3d05d2a96.ctex"]
+source_file="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/walls/sprites/walls2.png"
+dest_files=["res://.godot/imported/walls2.png-6f2b31f700b6c8f52c499e2c1b0af2d2.ctex"]
 
 [params]
 

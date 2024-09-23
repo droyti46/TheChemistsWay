@@ -1,21 +1,65 @@
-[gd_scene load_steps=5 format=3 uid="uid://c01a66ufjqjo2"]
+[gd_scene load_steps=11 format=3 uid="uid://c01a66ufjqjo2"]
 
-[ext_resource type="Texture2D" uid="uid://cy10kt6glh0lo" path="res://characters/players/tony/sprites/idle/idle.png" id="1_npbt8"]
 [ext_resource type="Script" path="res://characters/players/player_base.gd" id="1_q6ido"]
+[ext_resource type="Texture2D" uid="uid://d4mdf812sv0j0" path="res://characters/players/tony/sprites/side/craft/craft_side.png" id="2_krfkd"]
+[ext_resource type="Texture2D" uid="uid://dlq0bt3cruy1p" path="res://characters/players/tony/sprites/side/idle/idle_side.png" id="3_1d0ov"]
+[ext_resource type="Texture2D" uid="uid://dqqegmem1gonw" path="res://characters/players/tony/sprites/behind/idle/idle_behind.png" id="4_n5ens"]
+[ext_resource type="Texture2D" uid="uid://c5x4vubolo0j8" path="res://characters/players/tony/sprites/behind/step/step_behind2.png" id="5_42xgq"]
+[ext_resource type="Texture2D" uid="uid://dnp8cth0to1v8" path="res://characters/players/tony/sprites/behind/step/step_behind1.png" id="5_eo2y2"]
+[ext_resource type="Texture2D" uid="uid://o02f4a8xo820" path="res://characters/players/tony/sprites/side/step/step_side1.png" id="7_45ug4"]
+[ext_resource type="Texture2D" uid="uid://chadpcu2nr32m" path="res://characters/players/tony/sprites/side/step/step_side2.png" id="8_yhwr5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qh1o4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_npbt8")
+"texture": ExtResource("2_krfkd")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"craft_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_n5ens")
+}],
+"loop": true,
+"name": &"idle_behind",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1d0ov")
+}],
+"loop": true,
+"name": &"idle_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_eo2y2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_42xgq")
+}],
+"loop": true,
+"name": &"step_behind",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_45ug4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yhwr5")
+}],
+"loop": true,
+"name": &"step_side",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5cap7"]
-size = Vector2(68, 92)
+size = Vector2(68, 91)
 
 [node name="PlayerBase" type="CharacterBody2D"]
 script = ExtResource("1_q6ido")
@@ -24,8 +68,10 @@ script = ExtResource("1_q6ido")
 unique_name_in_owner = true
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_qh1o4")
-animation = &"idle"
+animation = &"idle_side"
+frame_progress = 0.501112
+offset = Vector2(0, -5)
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(6, 10)
+position = Vector2(1, -21)
 shape = SubResource("RectangleShape2D_5cap7")

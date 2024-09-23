@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyu20cg7krg3g"]
+
+[ext_resource type="Script" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/walls/walls.gd" id="1_563ky"]
+[ext_resource type="Texture2D" uid="uid://c0eaqttjt51en" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/walls/sprites/walls1.png" id="1_ueinl"]
+
+[node name="Walls" type="Node2D"]
+script = ExtResource("1_563ky")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_ueinl")

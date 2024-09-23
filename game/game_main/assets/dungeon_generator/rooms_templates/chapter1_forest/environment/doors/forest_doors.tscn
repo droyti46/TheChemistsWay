@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2f41gglc4dhy"]
+
+[ext_resource type="Texture2D" uid="uid://bni2rv56bsq8b" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/sprites/forest_door1.png" id="1_5pqbo"]
+[ext_resource type="Texture2D" uid="uid://canav0n48f48r" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/sprites/forest_door2.png" id="2_5upjq"]
+[ext_resource type="Texture2D" uid="uid://u65csxgibh35" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/sprites/forest_door3.png" id="3_wwxmj"]
+[ext_resource type="Texture2D" uid="uid://d3jawblrpaqau" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/sprites/forest_door4.png" id="4_y1kip"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gtieh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5pqbo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_5upjq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wwxmj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_y1kip")
+}],
+"loop": false,
+"name": &"open",
+"speed": 10.0
+}]
+
+[node name="ForestDoors" type="StaticBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -0.5)
+scale = Vector2(4, 3.96875)
+sprite_frames = SubResource("SpriteFrames_gtieh")
+animation = &"open"
+frame = 3
+frame_progress = 1.0

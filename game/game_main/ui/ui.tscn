@@ -1,4 +1,8 @@
-[gd_scene format=3 uid="uid://s1biukiv8luv"]
+[gd_scene load_steps=3 format=3 uid="uid://s1biukiv8luv"]
+
+[ext_resource type="Texture2D" uid="uid://bpwodwcauybbp" path="res://characters/players/tony/sprites/dialogue/dialogue.png" id="1_yk6pm"]
+
+[sub_resource type="FontVariation" id="FontVariation_wrjk4"]
 
 [node name="Ui" type="Control"]
 layout_mode = 3
@@ -17,3 +21,32 @@ anchor_bottom = 1.0
 offset_top = -109.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Dialogue" type="Sprite2D" parent="."]
+position = Vector2(81, 621)
+scale = Vector2(0.190603, 0.190603)
+texture = ExtResource("1_yk6pm")
+
+[node name="HealthBar" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 127.0
+offset_top = 601.0
+offset_right = 355.0
+offset_bottom = 632.0
+color = Color(0.792157, 0.235294, 0.223529, 1)
+
+[node name="Label" type="Label" parent="HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_wrjk4")
+text = "124/124"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true

@@ -5,4 +5,4 @@ extends Node
 """
 
 # Путь до папки с готовыми шаблонами комнат
-const ROOMS_TEMPLATES_DIRECTORY: String = 'res://game/game_main/level_generator/templates/'
+const ROOMS_TEMPLATES_DIRECTORY: String = "res://game/game_main/assets/dungeon_generator/rooms_templates/"

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr10dt5pvg5wb"]
+
+[ext_resource type="Script" path="res://game/game_main/assets/dungeon_generator/rooms_templates/tile_base.gd" id="1_1wxnu"]
+[ext_resource type="Texture2D" uid="uid://cu85ve48182rq" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/tiles/sprites/forest_tile1.png" id="2_cfdp1"]
+
+[node name="TileBase" type="Node2D"]
+script = ExtResource("1_1wxnu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_cfdp1")

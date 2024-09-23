@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://xnmk6bk0jodf"]
+
+[ext_resource type="PackedScene" uid="uid://dr10dt5pvg5wb" path="res://game/game_main/assets/dungeon_generator/rooms_templates/tile_base.tscn" id="1_xvuaw"]
+
+[node name="TileBase" instance=ExtResource("1_xvuaw")]

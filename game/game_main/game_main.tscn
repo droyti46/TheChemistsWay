@@ -1,24 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsb5ucpwuiu7f"]
+[gd_scene load_steps=8 format=3 uid="uid://bsb5ucpwuiu7f"]
 
 [ext_resource type="Script" path="res://game/game_main/game_main.gd" id="1_77d6o"]
 [ext_resource type="PackedScene" uid="uid://s1biukiv8luv" path="res://game/game_main/ui/ui.tscn" id="1_x2ry1"]
 [ext_resource type="Script" path="res://game/game_main/assets/dungeon_generator/dungeon_generator.gd" id="3_kpia3"]
 [ext_resource type="Script" path="res://game/game_main/assets/dungeon_generator/dungeon_builder.gd" id="4_tkdbc"]
+[ext_resource type="PackedScene" uid="uid://mhg8tltmy0b0" path="res://game/game_main/assets/dungeon_generator/rooms_templates/room_base.tscn" id="5_64non"]
+[ext_resource type="PackedScene" uid="uid://bhvmkddx2sdfn" path="res://characters/players/tony/tony.tscn" id="6_y4fly"]
+[ext_resource type="Texture2D" uid="uid://bmyreqve1qxgj" path="res://characters/enemies/Fish/sprites/front/idle/idle1.png" id="7_qs3ba"]
 
 [node name="GameMain" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_77d6o")
 
 [node name="UICanvas" type="CanvasLayer" parent="."]
 
 [node name="Ui" parent="UICanvas" instance=ExtResource("1_x2ry1")]
-
-[node name="BGBlack" type="ColorRect" parent="UICanvas"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
 
 [node name="DungeonGenerator" type="Node" parent="."]
 unique_name_in_owner = true
@@ -27,3 +23,24 @@ script = ExtResource("3_kpia3")
 [node name="DungeonBuilder" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("4_tkdbc")
+
+[node name="RoomBase" parent="." instance=ExtResource("5_64non")]
+
+[node name="RoomBase2" parent="." instance=ExtResource("5_64non")]
+position = Vector2(-1204, -14)
+
+[node name="Tony" parent="." instance=ExtResource("6_y4fly")]
+position = Vector2(507, 299)
+
+[node name="Camera2D" type="Camera2D" parent="Tony"]
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+drag_left_margin = 0.5
+drag_top_margin = 0.5
+drag_right_margin = 0.5
+drag_bottom_margin = 0.5
+
+[node name="Idle1" type="Sprite2D" parent="."]
+position = Vector2(185, 165)
+scale = Vector2(4, 4)
+texture = ExtResource("7_qs3ba")
