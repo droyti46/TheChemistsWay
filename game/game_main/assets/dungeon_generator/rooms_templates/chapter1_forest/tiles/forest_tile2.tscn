@@ -6,5 +6,5 @@
 [node name="TileBase" instance=ExtResource("1_hqesg")]
 
 [node name="Sprite2D" parent="." index="0"]
-scale = Vector2(4, 4)
+scale = Vector2(1, 1)
 texture = ExtResource("2_1eicj")

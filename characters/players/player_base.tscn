@@ -70,8 +70,6 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_qh1o4")
 animation = &"idle_side"
 frame_progress = 0.501112
-offset = Vector2(0, -5)
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(1, -21)
 shape = SubResource("RectangleShape2D_5cap7")

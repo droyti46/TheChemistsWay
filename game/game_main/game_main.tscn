@@ -1,38 +1,45 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsb5ucpwuiu7f"]
+[gd_scene load_steps=6 format=3 uid="uid://bsb5ucpwuiu7f"]
 
 [ext_resource type="Script" path="res://game/game_main/game_main.gd" id="1_77d6o"]
 [ext_resource type="PackedScene" uid="uid://s1biukiv8luv" path="res://game/game_main/ui/ui.tscn" id="1_x2ry1"]
 [ext_resource type="Script" path="res://game/game_main/assets/dungeon_generator/dungeon_generator.gd" id="3_kpia3"]
 [ext_resource type="Script" path="res://game/game_main/assets/dungeon_generator/dungeon_builder.gd" id="4_tkdbc"]
-[ext_resource type="PackedScene" uid="uid://mhg8tltmy0b0" path="res://game/game_main/assets/dungeon_generator/rooms_templates/room_base.tscn" id="5_64non"]
 [ext_resource type="PackedScene" uid="uid://bhvmkddx2sdfn" path="res://characters/players/tony/tony.tscn" id="6_y4fly"]
-[ext_resource type="Texture2D" uid="uid://bmyreqve1qxgj" path="res://characters/enemies/Fish/sprites/front/idle/idle1.png" id="7_qs3ba"]
 
 [node name="GameMain" type="Node2D"]
-y_sort_enabled = true
 script = ExtResource("1_77d6o")
+
+[node name="Grass" type="ColorRect" parent="."]
+offset_left = -11102.0
+offset_top = -7078.0
+offset_right = 16536.0
+offset_bottom = 11123.0
+color = Color(0.580392, 0.666667, 0.380392, 1)
+metadata/_edit_lock_ = true
 
 [node name="UICanvas" type="CanvasLayer" parent="."]
 
 [node name="Ui" parent="UICanvas" instance=ExtResource("1_x2ry1")]
+metadata/_edit_lock_ = true
 
 [node name="DungeonGenerator" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_kpia3")
 
-[node name="DungeonBuilder" type="Node" parent="."]
+[node name="DungeonBuilder" type="Node" parent="." node_paths=PackedStringArray("dungeon_node")]
 unique_name_in_owner = true
 script = ExtResource("4_tkdbc")
+dungeon_node = NodePath("../Rooms")
 
-[node name="RoomBase" parent="." instance=ExtResource("5_64non")]
+[node name="Rooms" type="Node2D" parent="."]
+y_sort_enabled = true
 
-[node name="RoomBase2" parent="." instance=ExtResource("5_64non")]
-position = Vector2(-1204, -14)
-
-[node name="Tony" parent="." instance=ExtResource("6_y4fly")]
+[node name="Player" parent="Rooms" instance=ExtResource("6_y4fly")]
+unique_name_in_owner = true
+z_index = 1
 position = Vector2(507, 299)
 
-[node name="Camera2D" type="Camera2D" parent="Tony"]
+[node name="Camera" type="Camera2D" parent="Rooms/Player"]
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 drag_left_margin = 0.5
@@ -40,7 +47,4 @@ drag_top_margin = 0.5
 drag_right_margin = 0.5
 drag_bottom_margin = 0.5
 
-[node name="Idle1" type="Sprite2D" parent="."]
-position = Vector2(185, 165)
-scale = Vector2(4, 4)
-texture = ExtResource("7_qs3ba")
+[connection signal="move_next_room" from="Rooms/Player" to="." method="_on_player_move_next_room"]

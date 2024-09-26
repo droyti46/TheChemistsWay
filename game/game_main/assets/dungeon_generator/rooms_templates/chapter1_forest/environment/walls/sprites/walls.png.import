@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3jawblrpaqau"
-path="res://.godot/imported/forest_door4.png-21fdfe217fcf6186b652225ea317fbae.ctex"
+uid="uid://datuqbciqdlqf"
+path="res://.godot/imported/walls.png-1ed485b670e0fa80f3924e0f1cd98ab4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/sprites/forest_door4.png"
-dest_files=["res://.godot/imported/forest_door4.png-21fdfe217fcf6186b652225ea317fbae.ctex"]
+source_file="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/walls/sprites/walls.png"
+dest_files=["res://.godot/imported/walls.png-1ed485b670e0fa80f3924e0f1cd98ab4.ctex"]
 
 [params]
 

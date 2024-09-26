@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwebfkido6xdr"]
+
+[ext_resource type="PackedScene" uid="uid://cdj13qle67cc3" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/forest_door_left.tscn" id="1_pkw3q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4m1k"]
+size = Vector2(23, 31)
+
+[node name="ForestDoorRight" instance=ExtResource("1_pkw3q")]
+direction = 1
+
+[node name="AnimatedSprite" parent="." index="0"]
+flip_h = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(4.5, -0.5)
+shape = SubResource("RectangleShape2D_c4m1k")

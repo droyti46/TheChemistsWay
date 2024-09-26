@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnhdpgm5hfnab"]
+
+[ext_resource type="Script" path="res://game/game_main/assets/dungeon_generator/rooms_templates/door_base.gd" id="1_86fh3"]
+
+[node name="DoorBase" type="StaticBody2D"]
+script = ExtResource("1_86fh3")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

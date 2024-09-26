@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://dr10dt5pvg5wb" path="res://game/game_main/assets/dungeon_generator/rooms_templates/tile_base.tscn" id="1_xvuaw"]
 
 [node name="TileBase" instance=ExtResource("1_xvuaw")]
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(1, 1)

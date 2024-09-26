@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ce3xpuo2bosx6"
-path="res://.godot/imported/walls2.png-6f2b31f700b6c8f52c499e2c1b0af2d2.ctex"
+uid="uid://fvnyfrd052yk"
+path="res://.godot/imported/corner.png-765735c0b0aa1f2e0d29baa032fa8e28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/walls/sprites/walls2.png"
-dest_files=["res://.godot/imported/walls2.png-6f2b31f700b6c8f52c499e2c1b0af2d2.ctex"]
+source_file="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/walls/sprites/corner.png"
+dest_files=["res://.godot/imported/corner.png-765735c0b0aa1f2e0d29baa032fa8e28.ctex"]
 
 [params]
 
