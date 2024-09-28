@@ -5,14 +5,12 @@
 
 Чтобы совершить ход, требуется вызвать метод ```make_move()```
 ```gdscript
-func make_move(map: TileMap,
-			   player_pos: Vector2,
-			   other_enemies_pos: Array) -> Vector2:
+func make_move(map: TileMap, player_pos: Vector2, other_enemies_pos: Array) -> Vector2:
 ```
 Пример вызова:
 ```gdscript
 @onready var enemy: Sprite2D = $Enemies/Enemy
-@onready var room: TileMap = $room
+@onready var room: TileMap = $Room
 
 var player_pos: Vector2 = Vector2(2, 3)
 var other_enemies_pos: Array = [Vector2(0, 0), Vector2(4, 5)]
