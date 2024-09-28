@@ -63,7 +63,7 @@ func _fill_rooms_arrays(enemies_rooms_folder: String, special_rooms_folder: Stri
 		else:
 			break
 
-func build_dungeon(dungeon_setting: Dictionary):
+func build_dungeon(dungeon_setting: Dictionary) -> Dictionary:
 	
 	'''
 	Метод для построения подземелья (комнат, дверей, врагов и т.д.)
@@ -79,26 +79,37 @@ func build_dungeon(dungeon_setting: Dictionary):
 					со врагами
 				room_size (Vector2):
 					Размер комнаты по ширине и длине (в пикселях)
-				enemies_rooms_folder (String):
-					Папка со сценами комнат со врагами
+				enemies_room (PackedScene):
+					Загруженная сцена со врагами
 				special_rooms_folder (String):
 					Папка со сценами особых комнат
+
+	Возвращаемое значение:
+		rooms_loads (Dictionary):
+			словарь вида {координаты комнаты: сцена комнаты}
 	'''
+	
+	# Словарь, в который будут помещаться координаты комнат
+	# в качестве ключа и сцена комнаты в качестве значения
+	var rooms_loads: Dictionary
 	
 	# Распаковка переменных из словаря настроек
 	var rooms: Array = dungeon_setting["rooms"]
 	var special_room_chance: float = dungeon_setting["special_room_chance"]
 	var room_size: Vector2 = dungeon_setting["room_size"]
-	var enemies_rooms_folder: String = dungeon_setting["enemies_rooms_folder"]
+	var enemies_room: PackedScene = dungeon_setting["enemies_room"]
 	var special_rooms_folder: String = dungeon_setting["special_rooms_folder"]
 
-	_fill_rooms_arrays(enemies_rooms_folder, special_rooms_folder)
+	#_fill_rooms_arrays(enemies_rooms_folder, special_rooms_folder)
 	
 	for room in rooms:
 		# Выбор случайной комнаты из списка
-		var random_room_load = rooms_enemies_loads[randi() % rooms_enemies_loads.size()].instantiate()
-		random_room_load.position = room * room_size
-		dungeon_node.add_child(random_room_load)
+		var room_load = enemies_room.instantiate()
+		room_load.position = room * room_size
+		dungeon_node.add_child(room_load)
+		
+		# Добавляем в словарь
+		rooms_loads[room] = room_load
 		
 		# Пытаемся добавить дверь
 		for offset in [Vector2.LEFT,
@@ -108,4 +119,6 @@ func build_dungeon(dungeon_setting: Dictionary):
 			# Если дверь добавлять надо
 			if room + offset in rooms:
 				# То мы ее добавляем в этой стороне
-				random_room_load.create_door(offset)
+				room_load.create_door(offset)
+	
+	return rooms_loads

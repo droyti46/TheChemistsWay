@@ -3,13 +3,19 @@ extends CharacterBody2D
 '''
 Скрипт базового персонажа
 '''
+
+# Сигнал перемещения персонажа в другую комнату
 signal move_next_room
+# Закончилось здоровье
+signal health_is_over
+# Закончились ходы
+signal moves_are_over
 
 # Скорость персонажа
 const SPEED: float = 400.0
 # Количество пикселей, на которое телепортируется
 # игрок, когда войдет в дверь
-const ADD_NEXT_POS: int = 256
+const ADD_NEXT_POS: int = 245
 
 # Переменная, в которой хранится направление, в которое двигался
 # персонаж перед тем как игрок отжал кнопку
@@ -23,8 +29,6 @@ var movement_method: String = "free"
 
 """Переменные, которые нужны для пошагового
 перемещения по клеткам"""
-# Размер плитки
-var tile_size = 32 * 4
 # Actions и вектора
 var inputs = {
 	"player_right": Vector2.RIGHT,
@@ -78,8 +82,9 @@ func _set_configure_sprite(dir: String) -> void:
 			last_direction = "side"
 
 func _ready() -> void:
-	position = position.snapped(Vector2.ONE * tile_size)
-	position += Vector2.ONE * tile_size/2
+	# Выравнивание персонажа по клетке
+	position = position.snapped(Vector2.ONE * SpritesInfo.TILE_SIZE_FULL)
+	position += Vector2.ONE * SpritesInfo.TILE_SIZE_FULL / 2
 
 func _physics_process(_delta) -> void:
 	# Если метод перемещения free, т.е. свободный
@@ -143,7 +148,7 @@ func _grid_move(dir: String) -> void:
 	# Создание Tween для перемещения
 	var tween = create_tween()
 	tween.tween_property(self, "position",
-		position + inputs[dir] * tile_size, 1.0 / animation_speed)
+		position + inputs[dir] * SpritesInfo.TILE_SIZE_FULL, 1.0 / animation_speed)
 	moving = true
 	await tween.finished
 	moving = false
@@ -164,3 +169,11 @@ func set_movement_method(method: String) -> void:
 		return
 	
 	movement_method = method
+	
+	# Если выбран метод перемещения по клеткам
+	if movement_method == "grid":
+		# То примагничиваем персонажа к тайлу
+		position = position.snapped(Vector2.ONE * SpritesInfo.TILE_SIZE_FULL)
+		position += Vector2.ONE * SpritesInfo.TILE_SIZE_FULL / 2
+		# Анимация idle
+		$AnimatedSprite.play("idle_side")

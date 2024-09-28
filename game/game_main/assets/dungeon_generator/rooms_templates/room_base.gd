@@ -41,19 +41,23 @@ func create_door(direction: Vector2) -> void:
 		return
 	
 	# Загрузка информации из DOORS_INFO
-	var alternative_index: int = DOORS_INFO[direction]["alternative_index"]
 	var door_coords: Vector2i = DOORS_INFO[direction]["coords"]
 	var door_scene: StaticBody2D = DOORS_INFO[direction]["scene"].instantiate()
 	
 	# Установка положения двери
 	door_scene.position = map_to_local(door_coords)
 	# Добавление ноды двери
-	add_child(door_scene)
+	%Doors.add_child(door_scene)
 	
 	# Удаление стены (клетки, на которой
 	# сейчас находится дверь)
 	erase_cell(0, door_coords)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func close_doors() -> void:
+	
+	"""
+	Проигрывает анимацию закрытия дверей
+	"""
+	
+	for door in %Doors.get_children():
+		door.close_door()

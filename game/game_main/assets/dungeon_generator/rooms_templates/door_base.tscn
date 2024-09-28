@@ -8,3 +8,5 @@ script = ExtResource("1_86fh3")
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="OpenDoorPlayer" type="AudioStreamPlayer" parent="."]

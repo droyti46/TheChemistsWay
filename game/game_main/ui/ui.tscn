@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://s1biukiv8luv"]
+[gd_scene load_steps=5 format=3 uid="uid://s1biukiv8luv"]
 
+[ext_resource type="Script" path="res://game/game_main/ui/ui.gd" id="1_4q8rn"]
 [ext_resource type="Texture2D" uid="uid://bpwodwcauybbp" path="res://characters/players/tony/sprites/dialogue/dialogue.png" id="1_yk6pm"]
+[ext_resource type="PackedScene" uid="uid://b8bntr5jgfx7p" path="res://game/game_main/ui/mini_map/mini_map.tscn" id="2_a26m3"]
 
 [sub_resource type="FontVariation" id="FontVariation_wrjk4"]
 
@@ -11,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_4q8rn")
 
 [node name="AbilitiesControl" type="Control" parent="."]
 layout_mode = 1
@@ -50,3 +53,37 @@ text = "124/124"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_left = 897.0
+offset_top = 38.0
+offset_right = 1097.0
+offset_bottom = 238.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="MiniMapBG" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 300.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.0588235, 0.0588235, 0.54902)
+
+[node name="MiniMap" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_a26m3")]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Ваши ходы:"

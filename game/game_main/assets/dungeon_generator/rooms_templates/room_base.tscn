@@ -1,86 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://mhg8tltmy0b0"]
+[gd_scene load_steps=3 format=3 uid="uid://mhg8tltmy0b0"]
 
-[ext_resource type="PackedScene" uid="uid://xnmk6bk0jodf" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/tiles/forest_tile1.tscn" id="1_11syo"]
-[ext_resource type="PackedScene" uid="uid://c4qtfhxvr3wf6" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/tiles/forest_tile2.tscn" id="2_uxjo4"]
-[ext_resource type="PackedScene" uid="uid://cdj13qle67cc3" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/forest_door_left.tscn" id="4_xqjpm"]
-[ext_resource type="PackedScene" uid="uid://deo6kd17707y3" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/forest_door_bottom.tscn" id="5_07s52"]
-[ext_resource type="Texture2D" uid="uid://fvnyfrd052yk" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/walls/sprites/corner.png" id="5_w88ba"]
-[ext_resource type="PackedScene" uid="uid://bwebfkido6xdr" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/forest_door_right.tscn" id="6_e5who"]
-[ext_resource type="PackedScene" uid="uid://diku7y3841cp0" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/forest_door_top.tscn" id="7_j414a"]
-[ext_resource type="Texture2D" uid="uid://datuqbciqdlqf" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/walls/sprites/walls.png" id="8_q37se"]
 [ext_resource type="Script" path="res://game/game_main/assets/dungeon_generator/rooms_templates/room_base.gd" id="9_s66a1"]
-
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ogjrb"]
-resource_name = "Grass"
-scenes/2/scene = ExtResource("1_11syo")
-scenes/3/scene = ExtResource("2_uxjo4")
-
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_f8wln"]
-resource_name = "Doors"
-scenes/1/scene = ExtResource("4_xqjpm")
-scenes/2/scene = ExtResource("5_07s52")
-scenes/3/scene = ExtResource("6_e5who")
-scenes/4/scene = ExtResource("7_j414a")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxxjb"]
-texture = ExtResource("5_w88ba")
-texture_region_size = Vector2i(32, 32)
-0:0/next_alternative_id = 4
-0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(5.25, -16, -16, -16, -16, 16, 16, 16, 16, -3)
-0:0/1 = 1
-0:0/1/flip_h = true
-0:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/1/physics_layer_0/angular_velocity = 0.0
-0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -4, -4.75, -16, 16, -16, 16, 16, -16, 16)
-0:0/2 = 2
-0:0/2/flip_h = true
-0:0/2/flip_v = true
-0:0/2/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/2/physics_layer_0/angular_velocity = 0.0
-0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -4.25, 16, -16, 2.75)
-0:0/3 = 3
-0:0/3/flip_h = true
-0:0/3/transpose = true
-0:0/3/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/3/physics_layer_0/angular_velocity = 0.0
-0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 5.75, 16, 16, 1.75, 16, -16)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gy0yk"]
-texture = ExtResource("8_q37se")
-texture_region_size = Vector2i(32, 32)
-0:0/next_alternative_id = 4
-0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0.5, -16, 0.75, 16, -16, 16, -16, -16)
-0:0/1 = 1
-0:0/1/flip_h = true
-0:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/1/physics_layer_0/angular_velocity = 0.0
-0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(0.25, -16, 0.5, 16, 16, 16, 16, -16)
-0:0/2 = 2
-0:0/2/transpose = true
-0:0/2/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/2/physics_layer_0/angular_velocity = 0.0
-0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, -16, 16, -16, 16, -16)
-0:0/3 = 3
-0:0/3/flip_v = true
-0:0/3/transpose = true
-0:0/3/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/3/physics_layer_0/angular_velocity = 0.0
-0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 16, -16, 16, 16, 16, 16, 16)
 
 [sub_resource type="TileSet" id="TileSet_55b7u"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 8
 physics_layer_0/collision_mask = 3
-sources/1 = SubResource("TileSetScenesCollectionSource_ogjrb")
-sources/3 = SubResource("TileSetScenesCollectionSource_f8wln")
-sources/4 = SubResource("TileSetAtlasSource_gxxjb")
-sources/5 = SubResource("TileSetAtlasSource_gy0yk")
 
 [node name="RoomBase" type="TileMap"]
 y_sort_enabled = true
@@ -93,4 +18,12 @@ layer_0/z_index = 1
 layer_0/tile_data = PackedInt32Array(0, 4, 196608, 65536, 5, 0, 131072, 5, 0, 262144, 5, 0, 7, 5, 131072, 1, 5, 131072, 2, 5, 131072, 3, 5, 131072, 4, 5, 131072, 5, 5, 131072, 6, 5, 131072, 393217, 5, 196608, 393218, 5, 196608, 393219, 5, 196608, 393220, 5, 196608, 393221, 5, 196608, 393222, 5, 196608, 393223, 5, 196608, 393224, 5, 196608, 393225, 5, 196608, 327680, 5, 0, 393216, 4, 0, 8, 5, 131072, 9, 5, 131072, 10, 4, 131072, 196608, 5, 0, 393226, 4, 65536, 65546, 5, 65536, 131082, 5, 65536, 196618, 5, 65536, 262154, 5, 65536, 327690, 5, 65536)
 layer_1/name = "Grass"
 layer_1/tile_data = PackedInt32Array(0, 1, 131072, 2, 1, 131072, 65537, 1, 131072, 131074, 1, 131072, 131072, 1, 131072, 65539, 1, 131072, 131076, 1, 131072, 4, 1, 131072, 65541, 1, 131072, 262144, 1, 131072, 196609, 1, 131072, 262146, 1, 131072, 196611, 1, 131072, 262148, 1, 131072, 196613, 1, 131072, 131078, 1, 131072, 262150, 1, 131072, 6, 1, 131072, 1, 1, 196608, 65536, 1, 196608, 131073, 1, 196608, 196608, 1, 196608, 262145, 1, 196608, 131075, 1, 196608, 196610, 1, 196608, 65538, 1, 196608, 3, 1, 196608, 65540, 1, 196608, 196612, 1, 196608, 262147, 1, 196608, 262149, 1, 196608, 131077, 1, 196608, 196614, 1, 196608, 65542, 1, 196608, 7, 1, 196608, 131079, 1, 196608, 262151, 1, 196608, 65543, 1, 131072, 8, 1, 131072, 196615, 1, 131072, 262152, 1, 131072, 131080, 1, 131072, 196616, 1, 196608, 65544, 1, 196608, 5, 1, 196608, 327681, 1, 131072, 327683, 1, 131072, 327685, 1, 131072, 327687, 1, 131072, 65545, 1, 131072, 196617, 1, 131072, 327680, 1, 196608, 327682, 1, 196608, 327684, 1, 196608, 327686, 1, 196608, 327688, 1, 196608, 262153, 1, 196608, 131081, 1, 196608, 9, 1, 196608, 327689, 1, 131072, 393216, 1, 131072, 393218, 1, 131072, 393220, 1, 131072, 393222, 1, 131072, 393224, 1, 131072, 262154, 1, 131072, 131082, 1, 131072, 10, 1, 131072, 393217, 1, 196608, 393219, 1, 196608, 393221, 1, 196608, 393223, 1, 196608, 393225, 1, 196608, 327690, 1, 196608, 393226, 1, 131072, 196618, 1, 196608, 65546, 1, 196608)
+layer_2/name = "obstacles"
+layer_2/y_sort_enabled = true
+layer_2/z_index = 1
+layer_2/tile_data = PackedInt32Array()
 script = ExtResource("9_s66a1")
+
+[node name="Doors" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 1

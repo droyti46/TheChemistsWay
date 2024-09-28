@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8bntr5jgfx7p"]
+
+[ext_resource type="Texture2D" uid="uid://cjrb0xj4t4vd2" path="res://game/game_main/ui/mini_map/sprites/mini_map.png" id="1_e4k6k"]
+[ext_resource type="Texture2D" uid="uid://caag3ko24777m" path="res://game/game_main/ui/mini_map/sprites/mini_map_entered.png" id="2_nc4ct"]
+[ext_resource type="Script" path="res://game/game_main/ui/mini_map/mini_map.gd" id="3_5f0ck"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ugf1t"]
+texture = ExtResource("1_e4k6k")
+texture_region_size = Vector2i(16, 10)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c3tu2"]
+texture = ExtResource("2_nc4ct")
+texture_region_size = Vector2i(16, 10)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_i7sq7"]
+tile_size = Vector2i(16, 10)
+sources/2 = SubResource("TileSetAtlasSource_ugf1t")
+sources/3 = SubResource("TileSetAtlasSource_c3tu2")
+
+[node name="MiniMap" type="TileMap"]
+z_index = 3
+scale = Vector2(4, 4)
+tile_set = SubResource("TileSet_i7sq7")
+format = 2
+script = ExtResource("3_5f0ck")
+
+[node name="MiniMapEntered" type="Sprite2D" parent="."]
+texture = ExtResource("2_nc4ct")
+
+[node name="Camera2D" type="Camera2D" parent="MiniMapEntered"]
+position_smoothing_enabled = true

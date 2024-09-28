@@ -89,7 +89,7 @@ func generate_dungeon() -> Array:
 		
 	# Точкой начала выбираем центр подземелья
 	var central_room: Vector2 = Vector2(round(_dungeon_size / 2),
-										round(_dungeon_size / 2))
+										  round(_dungeon_size / 2))
 	_dungeon_map[central_room] = 1
 	_rooms.append(central_room)
 	
@@ -160,9 +160,12 @@ func _add_rooms(i: int, j: int) -> void:
 	# Перебираем смещения (комнаты вокруг)
 	# Например, комната слева находится со смещением [-1, 0]
 	# И так перебираем 4 направления (слева, справа, сверху, снизу)
-	for offset in [[-1, 0], [1, 0], [0, -1], [0, 1]]:
+	for offset in [Vector2.LEFT,
+				   Vector2.RIGHT,
+				   Vector2.UP,
+				   Vector2.DOWN]:
 		# Пытаемся добавить комнату
-		add = _add_one_room( i + offset[0], j + offset[1])
+		add = _add_one_room(i + offset[0], j + offset[1])
 		
 		# Если комната добавилась успешно, то 
 		if (add != INVALID_ROOM):

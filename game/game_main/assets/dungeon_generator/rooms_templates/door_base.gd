@@ -7,6 +7,7 @@ extends StaticBody2D
 # Например, если дверь находится на левой стороне,
 # то принимает значение Vector2.LEFT
 var direction_vector: Vector2
+# Закрыта ли чейчас дверь или нет
 
 func _ready() -> void:
 	# Смотрим на значение direction и выставляем
@@ -44,4 +45,11 @@ func get_direction() -> Vector2:
 	То вернет Vector.UP
 	'''
 	
+	$OpenDoorPlayer.play()
 	return direction_vector
+
+func close_door() -> void:
+	$AnimatedSprite.play("close")
+
+func open_door() -> void:
+	$AnimatedSprite.play_backwards("close")
