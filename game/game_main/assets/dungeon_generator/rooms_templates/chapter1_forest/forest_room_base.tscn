@@ -1,0 +1,71 @@
+[gd_scene load_steps=17 format=3 uid="uid://b7hsf3hjuadxy"]
+
+[ext_resource type="PackedScene" uid="uid://mhg8tltmy0b0" path="res://game/game_main/assets/dungeon_generator/rooms_templates/room_base.tscn" id="1_yvdva"]
+[ext_resource type="PackedScene" uid="uid://xnmk6bk0jodf" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/tiles/forest_tile1.tscn" id="2_31gm4"]
+[ext_resource type="PackedScene" uid="uid://c4qtfhxvr3wf6" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/tiles/forest_tile2.tscn" id="3_881wm"]
+[ext_resource type="PackedScene" uid="uid://cdj13qle67cc3" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/forest_door_left.tscn" id="4_qg5bf"]
+[ext_resource type="PackedScene" uid="uid://deo6kd17707y3" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/forest_door_bottom.tscn" id="5_njc5c"]
+[ext_resource type="PackedScene" uid="uid://bwebfkido6xdr" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/forest_door_right.tscn" id="6_w1ist"]
+[ext_resource type="PackedScene" uid="uid://diku7y3841cp0" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/forest_door_top.tscn" id="7_14kso"]
+[ext_resource type="Texture2D" uid="uid://fvnyfrd052yk" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/walls/sprites/corner.png" id="8_doegi"]
+[ext_resource type="Texture2D" uid="uid://datuqbciqdlqf" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/walls/sprites/walls.png" id="9_y7k3f"]
+[ext_resource type="Texture2D" uid="uid://ct30a5te3nb14" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/obstacles/obstacles.png" id="10_fbgul"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ogjrb"]
+resource_name = "Grass"
+scenes/2/scene = ExtResource("2_31gm4")
+scenes/3/scene = ExtResource("3_881wm")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_f8wln"]
+resource_name = "Doors"
+scenes/1/scene = ExtResource("4_qg5bf")
+scenes/2/scene = ExtResource("5_njc5c")
+scenes/3/scene = ExtResource("6_w1ist")
+scenes/4/scene = ExtResource("7_14kso")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxxjb"]
+texture = ExtResource("8_doegi")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_h = true
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gy0yk"]
+texture = ExtResource("9_y7k3f")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/transpose = true
+0:0/3 = 3
+0:0/3/flip_v = true
+0:0/3/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1f210"]
+texture = ExtResource("10_fbgul")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_a6gh5"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 8
+physics_layer_0/collision_mask = 3
+sources/1 = SubResource("TileSetScenesCollectionSource_ogjrb")
+sources/3 = SubResource("TileSetScenesCollectionSource_f8wln")
+sources/4 = SubResource("TileSetAtlasSource_gxxjb")
+sources/5 = SubResource("TileSetAtlasSource_gy0yk")
+sources/6 = SubResource("TileSetAtlasSource_1f210")
+tile_proxies/coords_level = [[0, Vector2i(0, 0)], [6, Vector2i(0, 0)], [2, Vector2i(0, 0)], [6, Vector2i(1, 0)]]
+
+[node name="RoomBase" instance=ExtResource("1_yvdva")]
+tile_set = SubResource("TileSet_a6gh5")

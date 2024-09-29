@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://ll8bs3s7trbs"]
+[gd_scene load_steps=4 format=3 uid="uid://ll8bs3s7trbs"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_8fgha"]
 [ext_resource type="PackedScene" uid="uid://bsb5ucpwuiu7f" path="res://game/game_main/game_main.tscn" id="2_ybrnb"]
+[ext_resource type="AudioStream" uid="uid://ckutunj1183ad" path="res://music/forest_soundtrack.mp3" id="3_smjy2"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8fgha")
 
 [node name="GameMain" parent="." instance=ExtResource("2_ybrnb")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_smjy2")
+autoplay = true

@@ -62,6 +62,16 @@ func _fill_rooms_arrays(enemies_rooms_folder: String, special_rooms_folder: Stri
 			room_index += 1
 		else:
 			break
+			
+func _add_doors(room_coords: Vector2i, room_scene: TileMap, rooms: Array):
+	for offset in [Vector2i.LEFT,
+				   Vector2i.RIGHT, 
+				   Vector2i.UP,
+				   Vector2i.DOWN]:
+		# Если дверь добавлять надо
+		if room_coords + offset in rooms:
+			# То мы ее добавляем в этой стороне
+			room_scene.create_door(offset)
 
 func build_dungeon(dungeon_setting: Dictionary) -> Dictionary:
 	
@@ -97,12 +107,19 @@ func build_dungeon(dungeon_setting: Dictionary) -> Dictionary:
 	var rooms: Array = dungeon_setting["rooms"]
 	var special_room_chance: float = dungeon_setting["special_room_chance"]
 	var room_size: Vector2i = dungeon_setting["room_size"]
+	var start_room: TileMap = dungeon_setting["start_room"].instantiate()
 	var enemies_room: PackedScene = dungeon_setting["enemies_room"]
 	var special_rooms_folder: String = dungeon_setting["special_rooms_folder"]
 
 	#_fill_rooms_arrays(enemies_rooms_folder, special_rooms_folder)
 	
-	for room in rooms:
+	# Создание стартовой комнаты
+	start_room.position = rooms[0] * room_size
+	dungeon_node.add_child(start_room)
+	rooms_loads[rooms[0]] = start_room
+	_add_doors(rooms[0], start_room, rooms)
+
+	for room in rooms.slice(1):
 		# Выбор случайной комнаты из списка
 		var room_load = enemies_room.instantiate()
 		room_load.position = room * room_size
@@ -112,13 +129,6 @@ func build_dungeon(dungeon_setting: Dictionary) -> Dictionary:
 		rooms_loads[room] = room_load
 		
 		# Пытаемся добавить дверь
-		for offset in [Vector2i.LEFT,
-					   Vector2i.RIGHT, 
-					   Vector2i.UP,
-					   Vector2i.DOWN]:
-			# Если дверь добавлять надо
-			if room + offset in rooms:
-				# То мы ее добавляем в этой стороне
-				room_load.create_door(offset)
+		_add_doors(room, room_load, rooms)
 	
 	return rooms_loads

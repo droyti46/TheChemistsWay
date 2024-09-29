@@ -1,5 +1,8 @@
 extends "res://game/game_main/assets/dungeon_generator/rooms_templates/room_base.gd"
 
+# Все монстры сделали ходы
+signal enemies_finished_moves
+
 # Минимальное и максимальное количество препятствий
 # в комнате соответственно
 const MIN_COUNT_OBSTACLES: int = 1
@@ -122,3 +125,12 @@ func make_moves(player_coords: Vector2i) -> void:
 		)
 		enemy.step_animate(enemy_move)
 		await enemy.step_finished
+	
+	# Передаем новую информацию о позиции каждого монстра игроку
+	for enemy in $Enemies.get_children():
+		var enemies_coords = []
+		enemies_coords.append(enemy.get_coords())
+		player.set_coords("enemies", enemies_coords)
+	
+	# Вызываем сигнал, ведь все монстры походили
+	emit_signal("enemies_finished_moves")

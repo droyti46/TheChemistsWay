@@ -1,10 +1,49 @@
-[gd_scene load_steps=5 format=3 uid="uid://s1biukiv8luv"]
+[gd_scene load_steps=9 format=3 uid="uid://s1biukiv8luv"]
 
 [ext_resource type="Script" path="res://game/game_main/ui/ui.gd" id="1_4q8rn"]
 [ext_resource type="Texture2D" uid="uid://bpwodwcauybbp" path="res://characters/players/tony/sprites/dialogue/dialogue.png" id="1_yk6pm"]
 [ext_resource type="PackedScene" uid="uid://b8bntr5jgfx7p" path="res://game/game_main/ui/mini_map/mini_map.tscn" id="2_a26m3"]
+[ext_resource type="FontFile" uid="uid://cv3gxgpg1oea3" path="res://resources/fonts/bold.ttf" id="4_2ii0t"]
 
 [sub_resource type="FontVariation" id="FontVariation_wrjk4"]
+
+[sub_resource type="Animation" id="Animation_e4hs3"]
+resource_name = "reduce_moves"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CountMovesLabel:theme_override_font_sizes/font_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.615572, 1.7411, 0.707107),
+"update": 2,
+"values": [31, 40, 31]
+}
+
+[sub_resource type="Animation" id="Animation_5n4os"]
+resource_name = "show_fight"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CountMovesLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.659754, 1.56917),
+"update": 0,
+"values": [Vector2(0, -70), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k1v04"]
+_data = {
+"reduce_moves": SubResource("Animation_e4hs3"),
+"show_fight": SubResource("Animation_5n4os")
+}
 
 [node name="Ui" type="Control"]
 layout_mode = 3
@@ -82,8 +121,22 @@ color = Color(0.0588235, 0.0588235, 0.0588235, 0.54902)
 
 [node name="MiniMap" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_a26m3")]
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_right = 40.0
+[node name="CountMovesLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -70.0
 offset_bottom = 23.0
-text = "Ваши ходы:"
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 17
+theme_override_fonts/font = ExtResource("4_2ii0t")
+theme_override_font_sizes/font_size = 31
+text = "Ваши ходы: 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FightAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_k1v04")
+}

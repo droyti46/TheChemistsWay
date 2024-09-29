@@ -22,8 +22,10 @@ func make_move(map: TileMap,
 				   Vector2i.UP,
 				   Vector2i.DOWN]:
 		var new_enemy_coords = enemy_coords + offset
-		#if new_enemy_coords not in obstacles_coords and new_enemy_coords not in other_enemies_coords:
-		if Utils.coords_is_valid(new_enemy_coords, player_coords, obstacles_coords, other_enemies_coords):
+		if Utils.coords_is_valid(
+			new_enemy_coords,
+			Utils.merge_arrays([obstacles_coords, player_coords, other_enemies_coords])
+		):
 			available_offsets.append(offset)
 	
 	# Проверка, есть ли вообще доступные направления

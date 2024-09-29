@@ -1,5 +1,7 @@
 extends TileMap
 
+@export_enum("Start", "Enemies", "Chest") var room_type = 0
+
 var player = null
 
 const DOORS_INFO = {
@@ -65,34 +67,33 @@ func close_doors() -> void:
 		door.close_door()
 
 func set_player(new_player: Node2D, pos) -> void:
+	var player_coords: Vector2i
 	match pos:
 		"central":
-			new_player.position = map_to_local(
-				Vector2i(SpritesInfo.ROOM_COUNT_TILES_X,
-						 SpritesInfo.ROOM_COUNT_TILES_Y) / 2
-			)
+			player_coords = Vector2i(SpritesInfo.ROOM_COUNT_TILES_X,
+						 			 SpritesInfo.ROOM_COUNT_TILES_Y) / 2
 		Vector2i.LEFT:
-			new_player.position = map_to_local(
-				Vector2i(SpritesInfo.ROOM_COUNT_TILES_X - 1, 
-						 SpritesInfo.ROOM_COUNT_TILES_Y / 2)
-			)
+			player_coords = Vector2i(SpritesInfo.ROOM_COUNT_TILES_X - 1, 
+						 			 SpritesInfo.ROOM_COUNT_TILES_Y / 2)
 		Vector2i.RIGHT:
-			new_player.position = map_to_local(
-				Vector2i(0, 
-						 SpritesInfo.ROOM_COUNT_TILES_Y / 2)
-			)
+			player_coords = Vector2i(0, 
+						 			 SpritesInfo.ROOM_COUNT_TILES_Y / 2)
 		Vector2i.UP:
-			new_player.position = map_to_local(
-				Vector2i(SpritesInfo.ROOM_COUNT_TILES_X / 2, 
-						 SpritesInfo.ROOM_COUNT_TILES_Y - 1)
-			)
+			player_coords = Vector2i(SpritesInfo.ROOM_COUNT_TILES_X / 2, 
+									 SpritesInfo.ROOM_COUNT_TILES_Y - 1)
 		Vector2i.DOWN:
-			new_player.position = map_to_local(
-				Vector2i(SpritesInfo.ROOM_COUNT_TILES_X / 2, 
-						 0)
-			)
+			player_coords = Vector2i(SpritesInfo.ROOM_COUNT_TILES_X / 2, 
+									 0)
+
+	new_player.position = map_to_local(player_coords)
 	add_child(new_player)
 	player = new_player
+	
+	player.set_coords("player", player_coords)
+	player.set_coords("obstacles", get_used_cells(SpritesInfo.OBSTACLES_TILEMAP_LAYER))
 
 func delete_player() -> void:
 	remove_child(player)
+
+func get_type() -> String:
+	return ["Start", "Enemies", "Chest"][room_type]

@@ -34,6 +34,9 @@ var last_direction: String = "side"
 var movement_method: String = "free"
 # Текущее количество ходов
 var remained_moves: int = MAX_MOVES
+# Может ли персонаж пошагово ходить
+# (выключается, пока ходят враги)
+var can_step: bool = true
 
 """Переменные, которые нужны для пошагового
 перемещения по клеткам"""
@@ -49,6 +52,14 @@ var animation_speed = 3
 # Перемещается ли персонаж сейчас (относится только
 # к методу перемещения grid)
 var moving = false
+
+"""Переменные, в которые записана информация о
+текущей комнате (в которой находится игрок)"""
+# Координаты игрока в текущей комнате
+var player_coords: Vector2i
+# Координаты всех препятствий и врагов
+var obstacles_coords: Array
+var enemies_coords: Array
 
 func _set_configure_sprite(dir: String) -> void:
 	
@@ -139,6 +150,15 @@ func _unhandled_input(event) -> void:
 				# Если персонаж сейчас перемещается методом
 				# grid
 				if movement_method == "grid":
+					# Если мы не можем передвинуться,
+					# то просто прекращаем работу
+					if not Utils.coords_is_valid(
+						player_coords + Vector2i(inputs[dir].x, inputs[dir].y),
+						Utils.merge_arrays([obstacles_coords, enemies_coords])
+					) or not can_step:
+						# Проигрывание анимации, что не может идти
+						%CantStepAnimation.play("cant_step")
+						return
 					# То передвигаем персонажа по сетке
 					_grid_move(dir)
 				else:
@@ -146,6 +166,8 @@ func _unhandled_input(event) -> void:
 					_set_configure_sprite(dir)
 
 func _grid_move(dir: String) -> void:
+	# Перемещение
+	player_coords += Vector2i(inputs[dir].x, inputs[dir].y)
 	# Включение необходимой анимации
 	_set_configure_sprite(dir)
 	# Создание Tween для перемещения
@@ -188,3 +210,31 @@ func _reduce_moves():
 	if not remained_moves:
 		emit_signal("moves_are_over")
 		remained_moves = MAX_MOVES
+
+func set_coords(coords_type: String, coords) -> void:
+	
+	"""
+	Метод, устанавливающий игроку координаты
+	игрока, врага или препятствий
+	это необходимо, чтобы игрок мог видеть карту
+	"""
+	
+	if coords_type not in ["player", "enemies", "obstacles"]:
+		print(
+			"Недопустимое значение параметра coords_type!"
+		)
+		return
+	
+	match coords_type:
+		"player":
+			player_coords = coords
+		"enemies":
+			enemies_coords = coords
+		"obstacles":
+			obstacles_coords = coords
+
+func set_can_step(value: bool) -> void:
+	can_step = value
+
+func get_max_moves() -> int:
+	return MAX_MOVES

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://d180nn6iv1oxd"]
+
+[ext_resource type="Script" path="res://characters/players/camera.gd" id="1_2ev6c"]
+
+[node name="Camera" type="Camera2D"]
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+drag_left_margin = 0.5
+drag_top_margin = 0.5
+drag_right_margin = 0.5
+drag_bottom_margin = 0.5
+script = ExtResource("1_2ev6c")

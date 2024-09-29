@@ -1,4 +1,5 @@
 extends Camera2D
 
-#func _process(delta):
-	#position = get_local_mouse_position()
+func _physics_process(delta):
+	#offset = get_local_mouse_position() / 10
+	pass
