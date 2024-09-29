@@ -1,5 +1,7 @@
 extends TileMap
 
+var player = null
+
 const DOORS_INFO = {
 	Vector2.LEFT: {
 		"alternative_index": 1,
@@ -61,3 +63,36 @@ func close_doors() -> void:
 	
 	for door in %Doors.get_children():
 		door.close_door()
+
+func set_player(new_player: Node2D, pos) -> void:
+	match pos:
+		"central":
+			new_player.position = map_to_local(
+				Vector2i(SpritesInfo.ROOM_COUNT_TILES_X,
+						 SpritesInfo.ROOM_COUNT_TILES_Y) / 2
+			)
+		Vector2i.LEFT:
+			new_player.position = map_to_local(
+				Vector2i(SpritesInfo.ROOM_COUNT_TILES_X - 1, 
+						 SpritesInfo.ROOM_COUNT_TILES_Y / 2)
+			)
+		Vector2i.RIGHT:
+			new_player.position = map_to_local(
+				Vector2i(0, 
+						 SpritesInfo.ROOM_COUNT_TILES_Y / 2)
+			)
+		Vector2i.UP:
+			new_player.position = map_to_local(
+				Vector2i(SpritesInfo.ROOM_COUNT_TILES_X / 2, 
+						 SpritesInfo.ROOM_COUNT_TILES_Y - 1)
+			)
+		Vector2i.DOWN:
+			new_player.position = map_to_local(
+				Vector2i(SpritesInfo.ROOM_COUNT_TILES_X / 2, 
+						 0)
+			)
+	add_child(new_player)
+	player = new_player
+
+func delete_player() -> void:
+	remove_child(player)

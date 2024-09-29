@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsb5ucpwuiu7f"]
+[gd_scene load_steps=6 format=3 uid="uid://bsb5ucpwuiu7f"]
 
 [ext_resource type="Script" path="res://game/game_main/game_main.gd" id="1_77d6o"]
 [ext_resource type="PackedScene" uid="uid://s1biukiv8luv" path="res://game/game_main/ui/ui.tscn" id="1_x2ry1"]
 [ext_resource type="Script" path="res://game/game_main/assets/dungeon_generator/dungeon_generator.gd" id="3_kpia3"]
 [ext_resource type="Script" path="res://game/game_main/assets/dungeon_generator/dungeon_builder.gd" id="4_tkdbc"]
+[ext_resource type="PackedScene" uid="uid://bhvmkddx2sdfn" path="res://characters/players/tony/tony.tscn" id="6_y4fly"]
 
 [node name="GameMain" type="Node2D"]
 script = ExtResource("1_77d6o")
@@ -33,3 +34,19 @@ dungeon_node = NodePath("../Rooms")
 
 [node name="Rooms" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="Player" parent="Rooms" instance=ExtResource("6_y4fly")]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(507, 299)
+
+[node name="Camera" type="Camera2D" parent="Rooms/Player"]
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+drag_left_margin = 0.5
+drag_top_margin = 0.5
+drag_right_margin = 0.5
+drag_bottom_margin = 0.5
+
+[connection signal="move_next_room" from="Rooms/Player" to="." method="_on_player_move_next_room"]
+[connection signal="moves_are_over" from="Rooms/Player" to="." method="_on_player_moves_are_over"]

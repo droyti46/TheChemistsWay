@@ -12,8 +12,8 @@ const OBSTACLES_ATLAS_ID = 6
 
 # Минимальное и максимальное количество монстров
 # в комнате соответственно
-const MIN_COUNT_ENEMIES: int = 0
-const MAX_COUNT_ENEMIES: int = 3
+const MIN_COUNT_ENEMIES: int = 1
+const MAX_COUNT_ENEMIES: int = 1
 
 var enemy = preload("res://characters/enemies/Fish/fish.tscn")
 
@@ -92,7 +92,7 @@ func _create_enemies(all_coords: Array) -> void:
 		var enemy_scene = enemy.instantiate()
 		$Enemies.add_child(enemy_scene)
 		enemy_scene.position = map_to_local(random_enemy_position)
-		enemy_scene.set_pos(random_enemy_position)
+		enemy_scene.set_coords(random_enemy_position)
 		
 		# Удаление этих координат из списка для создания
 		# (т.к. нельзя сгенерировать два монстра на одном месте)
@@ -106,3 +106,19 @@ func _ready():
 	# Создание препятствий
 	_create_obstacles(tiles_for_create)
 	_create_enemies(tiles_for_create)
+
+func make_moves(player_coords: Vector2i) -> void:
+	for enemy in $Enemies.get_children():
+		var other_enemies_coords = []
+		for other_enemy in $Enemies.get_children():
+			if other_enemy == enemy:
+				continue
+			other_enemies_coords.append(other_enemy.get_coords())
+		
+		var enemy_move: Vector2 = enemy.make_move(
+			self,
+			player_coords,
+			other_enemies_coords
+		)
+		enemy.step_animate(enemy_move)
+		await enemy.step_finished

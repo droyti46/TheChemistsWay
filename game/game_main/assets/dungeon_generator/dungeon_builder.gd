@@ -96,7 +96,7 @@ func build_dungeon(dungeon_setting: Dictionary) -> Dictionary:
 	# Распаковка переменных из словаря настроек
 	var rooms: Array = dungeon_setting["rooms"]
 	var special_room_chance: float = dungeon_setting["special_room_chance"]
-	var room_size: Vector2 = dungeon_setting["room_size"]
+	var room_size: Vector2i = dungeon_setting["room_size"]
 	var enemies_room: PackedScene = dungeon_setting["enemies_room"]
 	var special_rooms_folder: String = dungeon_setting["special_rooms_folder"]
 
@@ -112,10 +112,10 @@ func build_dungeon(dungeon_setting: Dictionary) -> Dictionary:
 		rooms_loads[room] = room_load
 		
 		# Пытаемся добавить дверь
-		for offset in [Vector2.LEFT,
-					   Vector2.RIGHT, 
-					   Vector2.UP,
-					   Vector2.DOWN]:
+		for offset in [Vector2i.LEFT,
+					   Vector2i.RIGHT, 
+					   Vector2i.UP,
+					   Vector2i.DOWN]:
 			# Если дверь добавлять надо
 			if room + offset in rooms:
 				# То мы ее добавляем в этой стороне

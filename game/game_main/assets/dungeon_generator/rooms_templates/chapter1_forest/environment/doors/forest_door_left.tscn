@@ -28,7 +28,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8448c"]
-size = Vector2(17.5, 30)
+size = Vector2(4.5, 32)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3lakb"]
 streams_count = 5
@@ -53,7 +53,7 @@ sprite_frames = SubResource("SpriteFrames_1glyw")
 animation = &"close"
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(-5.75, 0)
+position = Vector2(-12.25, 0)
 shape = SubResource("RectangleShape2D_8448c")
 
 [node name="OpenDoorPlayer" parent="." index="2"]

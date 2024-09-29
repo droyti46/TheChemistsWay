@@ -24,7 +24,7 @@ https://habr.com/ru/articles/747660/
 """
 
 # Координаты комнаты, если она создана неуспешно
-const INVALID_ROOM: Vector2 = Vector2(-1, -1)
+const INVALID_ROOM: Vector2i = Vector2i(-1, -1)
 
 # Словрь, в котором хранится информация о том, является ли клетка
 # (i, j) комнатой или не является
@@ -80,7 +80,7 @@ func generate_dungeon() -> Array:
 	# Сначала заполняем массив нулями
 	for i in range(_dungeon_size):
 		for j in range(_dungeon_size):
-			_dungeon_map[Vector2(i, j)] = 0
+			_dungeon_map[Vector2i(i, j)] = 0
 			
 	# Если случайно вышло так, что должно быть больше комнат,
 	# Чем всего на карте, то меняем это, во избежание бесконечной рекурсии
@@ -88,7 +88,7 @@ func generate_dungeon() -> Array:
 		_room_count = _dungeon_map.size()
 		
 	# Точкой начала выбираем центр подземелья
-	var central_room: Vector2 = Vector2(round(_dungeon_size / 2),
+	var central_room: Vector2i = Vector2i(round(_dungeon_size / 2),
 										  round(_dungeon_size / 2))
 	_dungeon_map[central_room] = 1
 	_rooms.append(central_room)
@@ -108,7 +108,7 @@ func generate_dungeon() -> Array:
 		
 	return _rooms
 
-func _add_one_room(i: int, j: int) -> Vector2:
+func _add_one_room(i: int, j: int) -> Vector2i:
 	
 	"""
 	Функция для создания одной комнаты
@@ -131,14 +131,14 @@ func _add_one_room(i: int, j: int) -> Vector2:
 			# То делаем проверку:
 			# Проверяем не выходят ли переменные, за границы
 			# Проверяем нет ли уже комнаты по этим координатам
-			if ((i >= 0) && (i < _dungeon_size) && (j >= 0) && (j < _dungeon_size) && (_dungeon_map[Vector2(i, j)] != 1)):
+			if ((i >= 0) && (i < _dungeon_size) && (j >= 0) && (j < _dungeon_size) && (_dungeon_map[Vector2i(i, j)] != 1)):
 				# И добавляем комнату в массив
-				_dungeon_map[Vector2(i, j)] = 1
+				_dungeon_map[Vector2i(i, j)] = 1
 				# Уменьшаем количество комнат, которые необходимо
 				# сгенерировать
 				_room_count -= 1
 				# Возвращаем вектор, если создали комнату
-				return Vector2(i, j)
+				return Vector2i(i, j)
 				
 	# В случае неудачи возвращаем вектор [-1, -1]
 	return INVALID_ROOM
@@ -156,14 +156,14 @@ func _add_rooms(i: int, j: int) -> void:
 					сгенерировать остальные комнаты
 	"""
 	
-	var add: Vector2
+	var add: Vector2i
 	# Перебираем смещения (комнаты вокруг)
 	# Например, комната слева находится со смещением [-1, 0]
 	# И так перебираем 4 направления (слева, справа, сверху, снизу)
-	for offset in [Vector2.LEFT,
-				   Vector2.RIGHT,
-				   Vector2.UP,
-				   Vector2.DOWN]:
+	for offset in [Vector2i.LEFT,
+				   Vector2i.RIGHT,
+				   Vector2i.UP,
+				   Vector2i.DOWN]:
 		# Пытаемся добавить комнату
 		add = _add_one_room(i + offset[0], j + offset[1])
 		

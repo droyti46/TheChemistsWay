@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cdj13qle67cc3" path="res://game/game_main/assets/dungeon_generator/rooms_templates/chapter1_forest/environment/doors/forest_door_left.tscn" id="1_pkw3q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c4m1k"]
-size = Vector2(18, 31)
+size = Vector2(6, 32)
 
 [node name="ForestDoorRight" instance=ExtResource("1_pkw3q")]
 direction = 1
@@ -12,5 +12,5 @@ direction = 1
 flip_h = true
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(7, -0.5)
+position = Vector2(13, 0)
 shape = SubResource("RectangleShape2D_c4m1k")

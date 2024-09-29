@@ -4,8 +4,12 @@ extends CharacterBody2D
 Скрипт базового персонажа
 '''
 
+@onready var camera = $Camera
+
 # Сигнал перемещения персонажа в другую комнату
 signal move_next_room
+# Совершен ход
+signal grid_move_finished
 # Закончилось здоровье
 signal health_is_over
 # Закончились ходы
@@ -16,6 +20,8 @@ const SPEED: float = 400.0
 # Количество пикселей, на которое телепортируется
 # игрок, когда войдет в дверь
 const ADD_NEXT_POS: int = 245
+# Количество ходов
+const MAX_MOVES: int = 2
 
 # Переменная, в которой хранится направление, в которое двигался
 # персонаж перед тем как игрок отжал кнопку
@@ -26,6 +32,8 @@ var last_direction: String = "side"
 # free - свободное передвижение
 # grid - передвижение по клеткам
 var movement_method: String = "free"
+# Текущее количество ходов
+var remained_moves: int = MAX_MOVES
 
 """Переменные, которые нужны для пошагового
 перемещения по клеткам"""
@@ -81,12 +89,7 @@ func _set_configure_sprite(dir: String) -> void:
 			# Последнее направление
 			last_direction = "side"
 
-func _ready() -> void:
-	# Выравнивание персонажа по клетке
-	position = position.snapped(Vector2.ONE * SpritesInfo.TILE_SIZE_FULL)
-	position += Vector2.ONE * SpritesInfo.TILE_SIZE_FULL / 2
-
-func _physics_process(_delta) -> void:
+func _process(_delta) -> void:
 	# Если метод перемещения free, т.е. свободный
 	if movement_method == "free":
 		# Получение вектора направления
@@ -109,7 +112,7 @@ func _physics_process(_delta) -> void:
 			if collider.has_method("get_direction"):
 				var door_direction: Vector2 = collider.get_direction()
 				# Персонаж меняет положение
-				position += door_direction * ADD_NEXT_POS
+				# position += door_direction * ADD_NEXT_POS
 				# Вызывается сигнал
 				emit_signal("move_next_room", door_direction)
 				break
@@ -148,11 +151,16 @@ func _grid_move(dir: String) -> void:
 	# Создание Tween для перемещения
 	var tween = create_tween()
 	tween.tween_property(self, "position",
-		position + inputs[dir] * SpritesInfo.TILE_SIZE_FULL, 1.0 / animation_speed)
+		position + inputs[dir] * SpritesInfo.TILE_SIZE, 1.0 / animation_speed)
 	moving = true
 	await tween.finished
 	moving = false
 	%AnimatedSprite.play("idle_%s" % last_direction)
+	# Сигнал
+	emit_signal("grid_move_finished", inputs[dir])
+	# Уменьшение количества ходов, так как персонаж
+	# уже походил
+	_reduce_moves()
 
 func set_movement_method(method: String) -> void:
 	
@@ -172,8 +180,11 @@ func set_movement_method(method: String) -> void:
 	
 	# Если выбран метод перемещения по клеткам
 	if movement_method == "grid":
-		# То примагничиваем персонажа к тайлу
-		position = position.snapped(Vector2.ONE * SpritesInfo.TILE_SIZE_FULL)
-		position += Vector2.ONE * SpritesInfo.TILE_SIZE_FULL / 2
 		# Анимация idle
 		$AnimatedSprite.play("idle_side")
+
+func _reduce_moves():
+	remained_moves -= 1
+	if not remained_moves:
+		emit_signal("moves_are_over")
+		remained_moves = MAX_MOVES
