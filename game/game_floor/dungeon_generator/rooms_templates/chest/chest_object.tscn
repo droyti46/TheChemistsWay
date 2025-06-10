@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyxgyf0y4x6al"]
+
+[ext_resource type="PackedScene" uid="uid://dwtv1wgrbcepk" path="res://gdchem/scenes/game_substance.tscn" id="1_8bks1"]
+[ext_resource type="Script" path="res://game/game_floor/dungeon_generator/rooms_templates/chest/chest_object.gd" id="1_ac35b"]
+[ext_resource type="AudioStream" uid="uid://bfppakw6d2ov5" path="res://game/game_floor/dungeon_generator/rooms_templates/chest/sounds/collect_item.wav" id="3_bmw71"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0snop"]
+size = Vector2(13, 13)
+
+[node name="ChestObject" type="Node2D"]
+z_index = 1
+script = ExtResource("1_ac35b")
+
+[node name="GameSubstance" parent="." instance=ExtResource("1_8bks1")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -32.5
+offset_right = 32.5
+offset_bottom = 32.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+mouse_filter = 0
+
+[node name="Control" type="Control" parent="GameSubstance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerHandler" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="Collision" type="CollisionShape2D" parent="PlayerHandler"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_0snop")
+
+[node name="CollectAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bmw71")
+
+[connection signal="body_entered" from="PlayerHandler" to="." method="_on_player_handler_body_entered"]

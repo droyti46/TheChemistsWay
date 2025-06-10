@@ -1,14 +1,144 @@
-[gd_scene load_steps=4 format=3 uid="uid://ll8bs3s7trbs"]
+[gd_scene load_steps=8 format=3 uid="uid://ll8bs3s7trbs"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_8fgha"]
-[ext_resource type="PackedScene" uid="uid://bsb5ucpwuiu7f" path="res://game/game_main/game_main.tscn" id="2_ybrnb"]
+[ext_resource type="PackedScene" uid="uid://j4gif2vs2mo5" path="res://game/game_menu/main_menu/main_menu.tscn" id="2_by1wp"]
+[ext_resource type="FontFile" uid="uid://cv3gxgpg1oea3" path="res://resources/fonts/bold.ttf" id="3_s83wp"]
 [ext_resource type="AudioStream" uid="uid://ckutunj1183ad" path="res://music/forest_soundtrack.mp3" id="3_smjy2"]
+[ext_resource type="Texture2D" uid="uid://knlomp3e1xm6" path="res://game/game_menu/main_menu/sprites/art_book.png" id="4_lwgyt"]
+
+[sub_resource type="Animation" id="Animation_6x0ha"]
+resource_name = "loading"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LoadingCanvas/BG:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.3, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LoadingCanvas/BG/AdviceLabel:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LoadingCanvas/BG/ImageLoading:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(0.594604, 1.56917, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pg87g"]
+_data = {
+"loading": SubResource("Animation_6x0ha")
+}
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8fgha")
 
-[node name="GameMain" parent="." instance=ExtResource("2_ybrnb")]
+[node name="MainMenuCanvas" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="MainMenuCanvas" instance=ExtResource("2_by1wp")]
+
+[node name="LoadingCanvas" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="BG" type="ColorRect" parent="LoadingCanvas"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AdviceLabel" type="Label" parent="LoadingCanvas/BG"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -438.0
+offset_top = 121.0
+offset_right = 439.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.494118, 0.494118, 0.494118, 1)
+theme_override_fonts/font = ExtResource("3_s83wp")
+theme_override_font_sizes/font_size = 28
+text = "Загрузка"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AdviceText" type="Label" parent="LoadingCanvas/BG"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -438.0
+offset_top = 139.0
+offset_right = 439.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_s83wp")
+theme_override_font_sizes/font_size = 23
+text = "Следите за инвентарём, он может закончиться"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ImageLoading" type="TextureRect" parent="LoadingCanvas/BG"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -59.0
+offset_top = 258.0
+offset_right = 61.0
+offset_bottom = 478.0
+grow_horizontal = 2
+pivot_offset = Vector2(60, 110)
+mouse_filter = 2
+texture = ExtResource("4_lwgyt")
+stretch_mode = 5
+
+[node name="Screen" type="Node" parent="."]
+
+[node name="ScreenExample" type="Node" parent="Screen"]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("3_smjy2")
 autoplay = true
+
+[node name="LoadingAnimation" type="AnimationPlayer" parent="."]
+process_mode = 3
+libraries = {
+"": SubResource("AnimationLibrary_pg87g")
+}

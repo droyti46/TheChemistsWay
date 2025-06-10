@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3 uid="uid://j4gif2vs2mo5"]
+
+[ext_resource type="Script" path="res://game/game_menu/main_menu/main_menu.gd" id="1_3n5iw"]
+[ext_resource type="Texture2D" uid="uid://by3w4w6ehhw2m" path="res://resources/sprites/logos/ru_logo.png" id="3_0i1kn"]
+[ext_resource type="PackedScene" uid="uid://msfep4rlb1rg" path="res://game/game_menu/main_menu/main_menu_button.tscn" id="3_pq6af"]
+[ext_resource type="FontFile" uid="uid://cv3gxgpg1oea3" path="res://resources/fonts/bold.ttf" id="5_4yytl"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oa7oe"]
+load_path = "res://.godot/imported/main_background.png-1630a953f5ffbd5f7d040dcd8d5f1a45.ctex"
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3n5iw")
+
+[node name="BackgroundIMG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_oa7oe")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Logo" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.8)
+position = Vector2(277, 146)
+scale = Vector2(0.358073, 0.358073)
+texture = ExtResource("3_0i1kn")
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0.878431)
+layout_mode = 0
+offset_left = 40.0
+offset_top = 338.0
+offset_right = 310.0
+offset_bottom = 516.0
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="PlayButton" parent="Buttons" instance=ExtResource("3_pq6af")]
+layout_mode = 2
+button_text = "Играть"
+
+[node name="CreatorsButton" parent="Buttons" instance=ExtResource("3_pq6af")]
+layout_mode = 2
+button_text = "Создатели"
+
+[node name="ExitButton" parent="Buttons" instance=ExtResource("3_pq6af")]
+layout_mode = 2
+button_text = "Выход"
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.678431)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 244.0
+offset_right = 347.0
+offset_bottom = 267.0
+theme_override_fonts/font = ExtResource("5_4yytl")
+text = "beta v1.1"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.678431)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 271.0
+offset_right = 345.0
+offset_bottom = 340.0
+theme_override_fonts/font = ExtResource("5_4yytl")
+theme_override_font_sizes/font_size = 12
+text = "ВНИМАНИЕ! Игра находится в бета-тестировании, поэтому в химических реакциях могут содержаться ошибки"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[connection signal="button_clicked" from="Buttons/PlayButton" to="." method="_on_play_button_clicked"]
+[connection signal="button_clicked" from="Buttons/CreatorsButton" to="." method="_on_creators_button_button_clicked"]
+[connection signal="button_clicked" from="Buttons/ExitButton" to="." method="_on_exit_button_clicked"]

@@ -1,0 +1,193 @@
+[gd_scene load_steps=9 format=3 uid="uid://b43fu682rq5sd"]
+
+[ext_resource type="Texture2D" uid="uid://c1l5ygdbxbkpd" path="res://game/game_menu/mode_selection/sprites/bg_pattern.png" id="1_446rt"]
+[ext_resource type="Script" path="res://game/game_menu/character_selection/character_selection.gd" id="1_pg0vd"]
+[ext_resource type="Texture2D" uid="uid://bpc5bta7wpb8d" path="res://game/game_menu/character_selection/sprites/bg_inner.jpg" id="2_7rlxc"]
+[ext_resource type="FontFile" uid="uid://cv3gxgpg1oea3" path="res://resources/fonts/bold.ttf" id="3_128al"]
+[ext_resource type="Texture2D" uid="uid://bp4cotwk3arw3" path="res://characters/players/tony/sprites/icon/avatar.png" id="3_w13wy"]
+[ext_resource type="PackedScene" uid="uid://w3oacea3b45" path="res://game/game_menu/pause_menu/paused_button.tscn" id="4_ij1vr"]
+[ext_resource type="FontFile" uid="uid://ckhf4jfyripha" path="res://resources/fonts/regular.ttf" id="4_m7ss6"]
+[ext_resource type="PackedScene" uid="uid://dwtv1wgrbcepk" path="res://gdchem/scenes/game_substance.tscn" id="5_vpfkf"]
+
+[node name="PlayerSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pg0vd")
+
+[node name="BGOuter" type="TextureRect" parent="."]
+modulate = Color(0.403922, 0.403922, 0.403922, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_446rt")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="BGInner" type="Control" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="BDColor" type="ColorRect" parent="MarginContainer/BGInner"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.486275, 0.65098, 0.458824, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BGInner"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/BGInner/MarginContainer"]
+modulate = Color(0.52549, 0.52549, 0.52549, 1)
+layout_mode = 2
+texture = ExtResource("2_7rlxc")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CharacterInfo" type="VBoxContainer" parent="MarginContainer/BGInner"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.667
+anchor_top = 0.089
+anchor_right = 0.966
+anchor_bottom = 0.73
+offset_left = 0.0159302
+offset_top = 0.127998
+offset_right = 0.367981
+offset_bottom = -0.0400085
+
+[node name="CharacterName" type="Label" parent="MarginContainer/BGInner/CharacterInfo"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 35
+theme_override_fonts/font = ExtResource("3_128al")
+theme_override_font_sizes/font_size = 71
+text = "Тони"
+
+[node name="CharacterDesc" type="Label" parent="MarginContainer/BGInner/CharacterInfo"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_m7ss6")
+theme_override_font_sizes/font_size = 14
+text = "Лишь недавно открывший свои химические способности, Тони отважен, смел и сохраняет спокойствие даже стоя лицом к лицу перед врагом"
+autowrap_mode = 3
+
+[node name="CharacterProperty" type="VBoxContainer" parent="MarginContainer/BGInner"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.049
+anchor_top = 0.089
+anchor_right = 0.335
+anchor_bottom = 0.73
+offset_left = 0.351997
+offset_top = 0.127998
+offset_right = 0.0799866
+offset_bottom = -0.0400085
+theme_override_constants/separation = 16
+
+[node name="Property" type="Label" parent="MarginContainer/BGInner/CharacterProperty"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_m7ss6")
+theme_override_font_sizes/font_size = 25
+text = "Здоровье: 124
+Кол-во ходов: 2
+Особенности: нет"
+autowrap_mode = 3
+
+[node name="SubstancesContainer" type="GridContainer" parent="MarginContainer/BGInner/CharacterProperty"]
+layout_mode = 2
+columns = 4
+
+[node name="GameSubstance" parent="MarginContainer/BGInner/CharacterProperty/SubstancesContainer" instance=ExtResource("5_vpfkf")]
+layout_mode = 2
+
+[node name="GameSubstance2" parent="MarginContainer/BGInner/CharacterProperty/SubstancesContainer" instance=ExtResource("5_vpfkf")]
+layout_mode = 2
+
+[node name="GameSubstance3" parent="MarginContainer/BGInner/CharacterProperty/SubstancesContainer" instance=ExtResource("5_vpfkf")]
+layout_mode = 2
+
+[node name="GameSubstance4" parent="MarginContainer/BGInner/CharacterProperty/SubstancesContainer" instance=ExtResource("5_vpfkf")]
+layout_mode = 2
+
+[node name="CharacterImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -286.0
+offset_top = -301.0
+offset_right = 286.0
+offset_bottom = 456.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_w13wy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BackButton" parent="." instance=ExtResource("4_ij1vr")]
+offset_left = 22.0
+offset_top = 21.0
+offset_right = 235.0
+offset_bottom = 61.0
+button_text = "Назад"
+
+[node name="PlayButton" parent="." instance=ExtResource("4_ij1vr")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -61.0
+offset_right = -27.0
+offset_bottom = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+button_text = "Играть"
+
+[node name="CharactersButtonsContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -268.0
+offset_bottom = -123.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+alignment = 1
+
+[connection signal="click" from="BackButton" to="." method="_on_back_button_click"]

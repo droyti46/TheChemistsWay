@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://xnmk6bk0jodf"]
+
+[ext_resource type="PackedScene" uid="uid://dr10dt5pvg5wb" path="res://game/game_floor/dungeon_generator/rooms_templates/tile_base.tscn" id="1_xvuaw"]
+[ext_resource type="Texture2D" uid="uid://ohaxnkb5s445" path="res://game/game_floor/dungeon_generator/rooms_templates/chapter1_forest/tiles/sprites/flowers/flower1.png" id="2_iwoas"]
+
+[node name="TileBase" instance=ExtResource("1_xvuaw")]
+
+[node name="Decoration" type="Sprite2D" parent="." index="1"]
+visible = false
+z_index = 1
+y_sort_enabled = true
+texture = ExtResource("2_iwoas")
+offset = Vector2(0, 4.5)

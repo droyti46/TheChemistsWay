@@ -1,0 +1,6 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dkkyntyvso6bw"]
+
+[ext_resource type="Texture2D" uid="uid://bp62bn814v2ae" path="res://game/game_menu/main_menu/sprites/youtube_logo.png" id="1_x0nug"]
+
+[resource]
+texture = ExtResource("1_x0nug")

@@ -1,0 +1,6 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://b760kxwp3rivl"]
+
+[ext_resource type="Texture2D" uid="uid://y582s6tehc1v" path="res://game/game_menu/main_menu/sprites/vk_logo.png" id="1_capql"]
+
+[resource]
+texture = ExtResource("1_capql")

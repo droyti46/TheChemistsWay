@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3 uid="uid://b7hsf3hjuadxy"]
+
+[ext_resource type="PackedScene" uid="uid://mhg8tltmy0b0" path="res://game/game_floor/dungeon_generator/rooms_templates/room_base.tscn" id="1_sab4c"]
+[ext_resource type="TileSet" uid="uid://b1522c2njlek6" path="res://game/game_floor/dungeon_generator/rooms_templates/chapter1_forest/rooms/forest_room_base.tres" id="2_egq26"]
+[ext_resource type="Shader" path="res://game/game_floor/dungeon_generator/rooms_templates/chapter1_forest/god_rays.gdshader" id="12_i253f"]
+[ext_resource type="Shader" path="res://resources/shaders/clouds.gdshader" id="12_rxu8n"]
+[ext_resource type="Texture2D" uid="uid://dt4mxgr8yo7w4" path="res://resources/shaders/cloud.jpg" id="13_y5qoq"]
+[ext_resource type="PackedScene" uid="uid://lk1losoffe0j" path="res://game/game_floor/dungeon_generator/rooms_templates/chapter1_forest/tiles/bird.tscn" id="14_v03sf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_djtot"]
+shader = ExtResource("12_i253f")
+shader_parameter/angle = -0.3
+shader_parameter/position = 0.12
+shader_parameter/spread = 0.5
+shader_parameter/cutoff = 0.1
+shader_parameter/falloff = 0.2
+shader_parameter/edge_fade = 0.15
+shader_parameter/speed = 1.0
+shader_parameter/ray1_density = 8.0
+shader_parameter/ray2_density = 30.0
+shader_parameter/ray2_intensity = 0.3
+shader_parameter/color = Color(1, 0.901961, 0.65098, 0.235294)
+shader_parameter/hdr = false
+shader_parameter/seed = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1gjot"]
+shader = ExtResource("12_rxu8n")
+shader_parameter/density = 0.35
+shader_parameter/speed = Vector2(0.02, 0.01)
+shader_parameter/noise_texture = ExtResource("13_y5qoq")
+
+[sub_resource type="Animation" id="Animation_lxlse"]
+resource_name = "god_rays"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GodRays:material:shader_parameter/seed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 5.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_77wpt"]
+_data = {
+"god_rays": SubResource("Animation_lxlse")
+}
+
+[node name="RoomBase" instance=ExtResource("1_sab4c")]
+tile_set = ExtResource("2_egq26")
+layer_0/y_sort_enabled = false
+layer_0/z_index = 2
+layer_1/tile_data = PackedInt32Array(0, 1, 131072, 2, 1, 131072, 65537, 1, 131072, 131074, 1, 131072, 131072, 1, 131072, 65539, 1, 131072, 131076, 1, 131072, 4, 1, 131072, 65541, 1, 131072, 262144, 1, 131072, 196609, 1, 131072, 262146, 1, 131072, 196611, 1, 131072, 262148, 1, 131072, 196613, 1, 131072, 131078, 1, 131072, 262150, 1, 131072, 6, 1, 131072, 1, 1, 131072, 65536, 1, 131072, 131073, 1, 131072, 196608, 1, 131072, 262145, 1, 131072, 131075, 1, 131072, 196610, 1, 131072, 65538, 1, 131072, 3, 1, 131072, 65540, 1, 131072, 196612, 1, 131072, 262147, 1, 131072, 262149, 1, 131072, 131077, 1, 131072, 196614, 1, 131072, 65542, 1, 131072, 7, 1, 131072, 131079, 1, 131072, 262151, 1, 131072, 65543, 1, 131072, 8, 1, 131072, 196615, 1, 131072, 262152, 1, 131072, 131080, 1, 131072, 196616, 1, 131072, 65544, 1, 131072, 5, 1, 131072, 327681, 1, 131072, 327683, 1, 131072, 327685, 1, 131072, 327687, 1, 131072, 65545, 1, 131072, 196617, 1, 131072, 327680, 1, 131072, 327682, 1, 131072, 327684, 1, 131072, 327686, 1, 131072, 327688, 1, 131072, 262153, 1, 131072, 131081, 1, 131072, 9, 1, 131072, 327689, 1, 131072, 393216, 1, 131072, 393218, 1, 131072, 393220, 1, 131072, 393222, 1, 131072, 393224, 1, 131072, 262154, 1, 131072, 131082, 1, 131072, 10, 1, 131072, 393217, 1, 131072, 393219, 1, 131072, 393221, 1, 131072, 393223, 1, 131072, 393225, 1, 131072, 327690, 1, 131072, 393226, 1, 131072, 196618, 1, 131072, 65546, 1, 131072)
+
+[node name="GodRays" type="ColorRect" parent="." index="2"]
+z_index = 3
+material = SubResource("ShaderMaterial_djtot")
+offset_right = 351.0
+offset_bottom = 224.0
+mouse_filter = 2
+
+[node name="Clouds" type="ColorRect" parent="." index="3"]
+z_index = 3
+material = SubResource("ShaderMaterial_1gjot")
+offset_right = 351.0
+offset_bottom = 224.0
+mouse_filter = 2
+
+[node name="GodRaysAnimation" type="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_77wpt")
+}
+autoplay = "god_rays"
+
+[node name="Bird" parent="." index="5" instance=ExtResource("14_v03sf")]
+position = Vector2(79, 149.25)

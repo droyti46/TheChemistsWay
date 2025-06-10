@@ -1,0 +1,300 @@
+[gd_scene load_steps=14 format=3 uid="uid://siqlnlukawy6"]
+
+[ext_resource type="Script" path="res://game/game_menu/mode_selection/assets/game_mode_button.gd" id="1_8qyrk"]
+[ext_resource type="Texture2D" uid="uid://d3y2ygsou10c2" path="res://game/game_menu/mode_selection/sprites/modes/roguelike_mode.png" id="1_x5r5u"]
+[ext_resource type="FontFile" uid="uid://cv3gxgpg1oea3" path="res://resources/fonts/bold.ttf" id="3_bacbu"]
+[ext_resource type="VideoStream" path="res://game/game_menu/mode_selection/videos/roguelike.ogv" id="4_36lvw"]
+[ext_resource type="AudioStream" uid="uid://dwli85vvd82vf" path="res://game/game_menu/mode_selection/resources/audio/hover.wav" id="5_qwelg"]
+[ext_resource type="AudioStream" uid="uid://bvgixywtwjywl" path="res://game/game_menu/mode_selection/resources/audio/click.wav" id="6_gpgt3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iaod1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mwt2k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_53r25"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w0cfj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6lt7b"]
+
+[sub_resource type="Animation" id="Animation_72cml"]
+resource_name = "hover"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ModeNameLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BG/Margin:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.207843, 0.207843, 0.207843, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BG:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1.05, 1.05)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BG/Margin/Video:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ModeDescLabel:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ModeNameLabel:theme_override_font_sizes/font_size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 2,
+"values": [30, 50, 41]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ModeDescLabel:visible_ratio")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BG/BorderColor:color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BG/Margin:theme_override_constants/margin_left")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 8]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("BG/Margin:theme_override_constants/margin_top")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 8]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("BG/Margin:theme_override_constants/margin_right")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 8]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("BG/Margin:theme_override_constants/margin_bottom")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qc5jv"]
+_data = {
+"hover": SubResource("Animation_72cml")
+}
+
+[node name="GameModeButton" type="Control"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 200.0
+mouse_filter = 2
+script = ExtResource("1_8qyrk")
+
+[node name="BG" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(200, 200)
+
+[node name="BorderColor" type="ColorRect" parent="BG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Margin" type="MarginContainer" parent="BG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="ModeImage" type="TextureRect" parent="BG/Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_x5r5u")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Video" type="VideoStreamPlayer" parent="BG/Margin"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+mouse_filter = 2
+stream = ExtResource("4_36lvw")
+volume_db = -80.0
+autoplay = true
+expand = true
+loop = true
+
+[node name="ModeNameLabel" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -59.0
+offset_right = 60.0
+offset_bottom = 114.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("3_bacbu")
+theme_override_font_sizes/font_size = 30
+text = "Забег"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ModeDescLabel" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -200.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 18
+theme_override_fonts/font = ExtResource("3_bacbu")
+theme_override_font_sizes/font_size = 26
+text = "Описание"
+horizontal_alignment = 1
+autowrap_mode = 3
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_iaod1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_mwt2k")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_53r25")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_w0cfj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6lt7b")
+metadata/_edit_lock_ = true
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qc5jv")
+}
+
+[node name="HoverAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_qwelg")
+
+[node name="ClickAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_gpgt3")
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

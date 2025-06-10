@@ -1,0 +1,6 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://da8lx2hoc2t7v"]
+
+[ext_resource type="Texture2D" uid="uid://boo0dbyvtgmq4" path="res://game/game_menu/main_menu/sprites/tiktok_logo.png" id="1_707ai"]
+
+[resource]
+texture = ExtResource("1_707ai")

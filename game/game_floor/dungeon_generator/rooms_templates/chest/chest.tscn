@@ -1,0 +1,168 @@
+[gd_scene load_steps=14 format=3 uid="uid://chkdin6rrkcl"]
+
+[ext_resource type="Script" path="res://game/game_floor/dungeon_generator/rooms_templates/chest/chest.gd" id="1_6utyg"]
+[ext_resource type="Texture2D" uid="uid://bcr6gi2geyohu" path="res://game/game_floor/dungeon_generator/rooms_templates/chest/sprites/chest1.png" id="2_x0iji"]
+[ext_resource type="Texture2D" uid="uid://7toes6jc8rf4" path="res://game/game_floor/dungeon_generator/rooms_templates/chest/sprites/chest2.png" id="3_c3n2d"]
+[ext_resource type="Texture2D" uid="uid://crvc6eeqdjiwq" path="res://game/game_floor/dungeon_generator/rooms_templates/chest/sprites/chest3.png" id="4_t4ar7"]
+[ext_resource type="AudioStream" uid="uid://dbohnyojbeqe6" path="res://game/game_floor/dungeon_generator/rooms_templates/chest/sounds/open.wav" id="5_pheb1"]
+[ext_resource type="AudioStream" uid="uid://d3805amc1bgiu" path="res://game/game_floor/dungeon_generator/rooms_templates/chest/sounds/drop.wav" id="6_n4q1x"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gqayi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_x0iji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_c3n2d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_t4ar7")
+}],
+"loop": false,
+"name": &"open",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjsa0"]
+size = Vector2(28, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2h05w"]
+radius = 30.0
+
+[sub_resource type="Animation" id="Animation_c26ks"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rtlw4"]
+resource_name = "show"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -100), Vector2(0, 0), Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bhsq0"]
+_data = {
+"RESET": SubResource("Animation_c26ks"),
+"show": SubResource("Animation_rtlw4")
+}
+
+[sub_resource type="Gradient" id="Gradient_hixar"]
+offsets = PackedFloat32Array(0, 0.99375)
+colors = PackedColorArray(0.411765, 0.478431, 0.247059, 1, 0.243215, 0.288016, 0.133983, 1)
+
+[node name="Chest" type="StaticBody2D"]
+z_index = 1
+collision_layer = 4
+script = ExtResource("1_6utyg")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gqayi")
+animation = &"open"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_xjsa0")
+
+[node name="PlayerHandler" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="PlayerHandler"]
+visible = false
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_2h05w")
+
+[node name="OpenAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_pheb1")
+volume_db = 10.0
+
+[node name="ShowAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bhsq0")
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, 17)
+emitting = false
+amount = 15
+lifetime = 0.2
+one_shot = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 600.0
+initial_velocity_max = 650.0
+scale_amount_min = 15.0
+scale_amount_max = 25.0
+color_ramp = SubResource("Gradient_hixar")
+
+[node name="DropAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_n4q1x")
+
+[connection signal="body_entered" from="PlayerHandler" to="." method="_on_player_handler_body_entered"]

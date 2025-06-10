@@ -1,0 +1,152 @@
+[gd_scene load_steps=10 format=3 uid="uid://et8jkleystsp"]
+
+[ext_resource type="VideoStream" path="res://game/game_floor/ui/learning_cards/videos/step.ogv" id="1_0iewa"]
+[ext_resource type="FontFile" uid="uid://ckhf4jfyripha" path="res://resources/fonts/regular.ttf" id="1_chx5t"]
+[ext_resource type="Script" path="res://game/game_floor/ui/learning_cards/learning_card.gd" id="1_vpqfh"]
+[ext_resource type="Texture2D" uid="uid://c1l5ygdbxbkpd" path="res://game/game_menu/mode_selection/sprites/bg_pattern.png" id="2_p6yw5"]
+[ext_resource type="PackedScene" uid="uid://w3oacea3b45" path="res://game/game_menu/pause_menu/paused_button.tscn" id="3_5otjj"]
+
+[sub_resource type="Animation" id="Animation_pik80"]
+resource_name = "next"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LearningCard/MarginContainer/Content/Text:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rtaii"]
+_data = {
+"next": SubResource("Animation_pik80")
+}
+
+[sub_resource type="Animation" id="Animation_pps4m"]
+resource_name = "show"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LearningCard/BG:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d0m82"]
+_data = {
+"show": SubResource("Animation_pps4m")
+}
+
+[node name="Learning" type="ColorRect"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.129412, 0.129412, 0.129412, 0.745098)
+script = ExtResource("1_vpqfh")
+
+[node name="LearningCard" type="Control" parent="."]
+custom_minimum_size = Vector2(700, 521)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -260.5
+offset_right = 350.0
+offset_bottom = 260.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(350, 185)
+
+[node name="BG" type="TextureRect" parent="LearningCard"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_p6yw5")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="LearningCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Content" type="VBoxContainer" parent="LearningCard/MarginContainer"]
+layout_mode = 2
+
+[node name="Video" type="VideoStreamPlayer" parent="LearningCard/MarginContainer/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 360)
+layout_mode = 2
+stream = ExtResource("1_0iewa")
+volume_db = -80.0
+autoplay = true
+expand = true
+loop = true
+
+[node name="Text" type="Label" parent="LearningCard/MarginContainer/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_chx5t")
+text = "jgkjrglkrgrg"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="NextButton" parent="LearningCard/MarginContainer/Content" instance=ExtResource("3_5otjj")]
+layout_mode = 2
+button_text = "Дальше"
+
+[node name="NextAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rtaii")
+}
+
+[node name="ShowAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_d0m82")
+}
+
+[connection signal="click" from="LearningCard/MarginContainer/Content/NextButton" to="." method="_on_next_button_click"]

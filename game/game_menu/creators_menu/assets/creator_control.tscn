@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://7skcy2k4layf"]
+
+[ext_resource type="FontFile" uid="uid://cv3gxgpg1oea3" path="res://resources/fonts/bold.ttf" id="1_7kl2m"]
+[ext_resource type="Script" path="res://game/game_menu/creators_menu/assets/creator_control.gd" id="1_tk861"]
+[ext_resource type="FontFile" uid="uid://brc5jgbnpo03o" path="res://resources/fonts/pixel.ttf" id="2_v7xwl"]
+[ext_resource type="FontFile" uid="uid://ckhf4jfyripha" path="res://resources/fonts/regular.ttf" id="3_s86lx"]
+
+[node name="CreatorControl" type="Control"]
+custom_minimum_size = Vector2(0, 102)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -2.0
+offset_bottom = 102.0
+grow_horizontal = 2
+script = ExtResource("1_tk861")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreatorName" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_v7xwl")
+theme_override_font_sizes/font_size = 36
+text = "Соня Савенкова"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreatorNickname" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.513726, 0.513726, 0.513726, 1)
+theme_override_fonts/font = ExtResource("1_7kl2m")
+theme_override_font_sizes/font_size = 26
+text = "(Масти)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreatorRole" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.368627, 0.368627, 0.368627, 1)
+theme_override_fonts/font = ExtResource("3_s86lx")
+theme_override_font_sizes/font_size = 20
+text = "Автор идеи, 2D художник"
+horizontal_alignment = 1
+vertical_alignment = 1

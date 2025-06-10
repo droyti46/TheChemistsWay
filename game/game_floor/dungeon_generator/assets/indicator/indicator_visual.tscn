@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://ceob7whqa5or2"]
+
+[ext_resource type="Script" path="res://game/game_floor/dungeon_generator/assets/indicator/indicator_visual.gd" id="1_60pvs"]
+[ext_resource type="Texture2D" uid="uid://ctimg6kh8s5ia" path="res://game/game_floor/dungeon_generator/rooms_templates/sprites/attacked_tile.png" id="2_88sbu"]
+
+[sub_resource type="Animation" id="Animation_f2v6j"]
+resource_name = "show"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(0.594604, 1.8025, 0.594603),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.4, 1.4), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.523599, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ddm2m"]
+_data = {
+"show": SubResource("Animation_f2v6j")
+}
+
+[node name="IndicatorVisual" type="Node2D"]
+z_index = 1
+script = ExtResource("1_60pvs")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+rotation = 0.523599
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_88sbu")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ddm2m")
+}
+autoplay = "show"

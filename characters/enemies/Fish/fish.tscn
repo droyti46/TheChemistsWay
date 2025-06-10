@@ -1,9 +1,117 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnvobpt286ix3"]
+[gd_scene load_steps=15 format=3 uid="uid://cnvobpt286ix3"]
 
-[ext_resource type="PackedScene" uid="uid://b202eutiw3cnl" path="res://characters/enemies/enemy_base.tscn" id="1_s1k3v"]
-[ext_resource type="Texture2D" uid="uid://bmyreqve1qxgj" path="res://characters/enemies/Fish/sprites/front/idle/idle1.png" id="2_jdcd1"]
-[ext_resource type="Script" path="res://characters/enemies/Fish/fish.gd" id="3_ek28r"]
+[ext_resource type="PackedScene" uid="uid://b202eutiw3cnl" path="res://characters/enemies/enemy_base.tscn" id="1_anpcm"]
+[ext_resource type="Script" path="res://characters/enemies/fish/fish.gd" id="2_koj0w"]
+[ext_resource type="Texture2D" uid="uid://dtt4hwv6js0iq" path="res://characters/enemies/fish/sprites/behind/idle/idle_behind.png" id="3_3qprg"]
+[ext_resource type="Texture2D" uid="uid://ckbfyr13fjmof" path="res://characters/enemies/fish/sprites/front/attack/attack_front.png" id="4_6ti1a"]
+[ext_resource type="Texture2D" uid="uid://d2c7st70uh06u" path="res://characters/enemies/fish/sprites/side/attack/attack_side.png" id="5_3phtu"]
+[ext_resource type="Texture2D" uid="uid://bmyreqve1qxgj" path="res://characters/enemies/fish/sprites/front/idle/idle.png" id="6_ltvmw"]
+[ext_resource type="Texture2D" uid="uid://cpts33hs6elo7" path="res://characters/enemies/fish/sprites/side/idle/idle_side.png" id="7_kvkvw"]
+[ext_resource type="Texture2D" uid="uid://bmcjhpwed3b4m" path="res://characters/enemies/fish/sprites/behind/step/step_behind1.png" id="8_d06yd"]
+[ext_resource type="Texture2D" uid="uid://cj8djf1vurs4r" path="res://characters/enemies/fish/sprites/behind/step/step_behind2.png" id="9_3y7bj"]
+[ext_resource type="Texture2D" uid="uid://cgbllp8qg57p7" path="res://characters/enemies/fish/sprites/front/step/step_front2.png" id="10_avnqy"]
+[ext_resource type="Texture2D" uid="uid://cvb06yu0e7h00" path="res://characters/enemies/fish/sprites/front/step/step_front1.png" id="11_hktq0"]
+[ext_resource type="Texture2D" uid="uid://soehkyx7n8mp" path="res://characters/enemies/fish/sprites/side/step/step_side1.png" id="12_s3db8"]
+[ext_resource type="Texture2D" uid="uid://cg381sxfmnugu" path="res://characters/enemies/fish/sprites/side/step/step_side2.png" id="13_p5ucu"]
 
-[node name="Fish" instance=ExtResource("1_s1k3v")]
-texture = ExtResource("2_jdcd1")
-script = ExtResource("3_ek28r")
+[sub_resource type="SpriteFrames" id="SpriteFrames_wmy06"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3qprg")
+}],
+"loop": false,
+"name": &"attack_behind",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_6ti1a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ltvmw")
+}],
+"loop": false,
+"name": &"attack_front",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_3phtu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kvkvw")
+}],
+"loop": false,
+"name": &"attack_side",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3qprg")
+}],
+"loop": true,
+"name": &"idle_behind",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ltvmw")
+}],
+"loop": true,
+"name": &"idle_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_kvkvw")
+}],
+"loop": true,
+"name": &"idle_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_d06yd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3y7bj")
+}],
+"loop": true,
+"name": &"step_behind",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_avnqy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_hktq0")
+}],
+"loop": true,
+"name": &"step_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_s3db8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_p5ucu")
+}],
+"loop": true,
+"name": &"step_side",
+"speed": 5.0
+}]
+
+[node name="Fish" instance=ExtResource("1_anpcm")]
+script = ExtResource("2_koj0w")
+attacked = true
+enemy_name = "Рыбик"
+health = 60
+cost = 0.5
+
+[node name="AnimatedSprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_wmy06")
+animation = &"idle_front"
+autoplay = "idle_front"

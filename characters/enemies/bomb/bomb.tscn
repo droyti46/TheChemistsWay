@@ -1,0 +1,110 @@
+[gd_scene load_steps=15 format=3 uid="uid://db4585wfmk5tk"]
+
+[ext_resource type="PackedScene" uid="uid://b202eutiw3cnl" path="res://characters/enemies/enemy_base.tscn" id="1_0b2ns"]
+[ext_resource type="Script" path="res://characters/enemies/bomb/bomb.gd" id="2_g7huh"]
+[ext_resource type="Texture2D" uid="uid://5yhk8dp8iljr" path="res://characters/enemies/bomb/sprites/idle/bomb_idle.png" id="3_0w7br"]
+[ext_resource type="AudioStream" uid="uid://chlllrppbc0hl" path="res://characters/enemies/bomb/sounds/explosion.wav" id="3_yci5k"]
+[ext_resource type="Texture2D" uid="uid://bibyax256i4ej" path="res://characters/enemies/bomb/sprites/jump/bomb_jump1.png" id="4_w60q3"]
+[ext_resource type="Texture2D" uid="uid://dnc1xbqi1ka2u" path="res://characters/enemies/bomb/sprites/jump/bomb_jump2.png" id="5_whfig"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lr7nv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0w7br")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_w60q3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_whfig")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_451ul"]
+resource_name = "jump"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 0.812252, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -20), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dqpm6"]
+_data = {
+"jump": SubResource("Animation_451ul")
+}
+
+[sub_resource type="Gradient" id="Gradient_iv560"]
+offsets = PackedFloat32Array(0.466431, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lmr1s"]
+gradient = SubResource("Gradient_iv560")
+
+[sub_resource type="Curve" id="Curve_8kwm5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e0h0c"]
+curve = SubResource("Curve_8kwm5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j6yf6"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 500.0
+initial_velocity_max = 550.0
+gravity = Vector3(0, 0, 0)
+scale_min = 50.0
+scale_max = 70.0
+scale_curve = SubResource("CurveTexture_e0h0c")
+color_ramp = SubResource("GradientTexture1D_lmr1s")
+
+[node name="Bomb" instance=ExtResource("1_0b2ns")]
+script = ExtResource("2_g7huh")
+attacked = true
+damage_count = 52
+enemy_name = "Взрывная штучка"
+health = 40
+
+[node name="AnimatedSprite" parent="." index="0"]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_lr7nv")
+
+[node name="Button" parent="." index="1"]
+mouse_filter = 0
+metadata/_edit_lock_ = true
+
+[node name="JumpAnimation" type="AnimationPlayer" parent="." index="8"]
+libraries = {
+"": SubResource("AnimationLibrary_dqpm6")
+}
+
+[node name="ExplosionAudio" type="AudioStreamPlayer" parent="." index="9"]
+stream = ExtResource("3_yci5k")
+volume_db = 10.0
+
+[node name="ExplosionParticles" type="GPUParticles2D" parent="." index="10"]
+modulate = Color(0.431373, 0.258824, 0.254902, 1)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_j6yf6")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0

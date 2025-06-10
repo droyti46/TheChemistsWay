@@ -1,6 +1,470 @@
-[gd_scene load_steps=2 format=3 uid="uid://b202eutiw3cnl"]
+[gd_scene load_steps=27 format=3 uid="uid://b202eutiw3cnl"]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy_base.gd" id="1_v4x0y"]
+[ext_resource type="Texture2D" uid="uid://bmyreqve1qxgj" path="res://characters/enemies/fish/sprites/front/idle/idle.png" id="2_4y22d"]
+[ext_resource type="Shader" path="res://resources/shaders/outline.gdshader" id="2_at55m"]
+[ext_resource type="FontFile" uid="uid://cv3gxgpg1oea3" path="res://resources/fonts/bold.ttf" id="2_sr26t"]
+[ext_resource type="PackedScene" uid="uid://cfkoof5h4jac6" path="res://scenes/health_bar.tscn" id="3_mu81d"]
+[ext_resource type="AudioStream" uid="uid://cehwchpfmhx5p" path="res://characters/enemies/resources/sounds/damage.wav" id="4_c8al6"]
+[ext_resource type="FontFile" uid="uid://brc5jgbnpo03o" path="res://resources/fonts/pixel.ttf" id="5_1vvf3"]
 
-[node name="EnemyBase" type="Sprite2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hcxh0"]
+shader = ExtResource("2_at55m")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wi6id"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4y22d")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p6a1w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4rs0u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2bqp3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2odm4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6f0tb"]
+
+[sub_resource type="Animation" id="Animation_077ja"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../EnemyInfo/InfoContainer/Name:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../EnemyInfo/InfoContainer/WeaknessTitle:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../EnemyInfo/InfoContainer/WeaknessClass:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../EnemyInfo:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../EnemyInfo/InfoContainer/HealthBar:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ug3wv"]
+resource_name = "damage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../EnemyInfo:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../EnemyInfo/InfoContainer/Name:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../EnemyInfo/InfoContainer/WeaknessTitle:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../EnemyInfo/InfoContainer/WeaknessClass:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../EnemyInfo/InfoContainer/HealthBar:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.243137, 0.215686, 1), Color(1, 1, 1, 1), Color(1, 0.243137, 0.215686, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vvq1q"]
+resource_name = "death"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pts5g"]
+_data = {
+"RESET": SubResource("Animation_077ja"),
+"damage": SubResource("Animation_ug3wv"),
+"death": SubResource("Animation_vvq1q")
+}
+
+[sub_resource type="Animation" id="Animation_bdp0m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DamageLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rvqho"]
+resource_name = "show"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DamageLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_efrja"]
+_data = {
+"RESET": SubResource("Animation_bdp0m"),
+"show": SubResource("Animation_rvqho")
+}
+
+[sub_resource type="Animation" id="Animation_qhelb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyInfo:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.5),
+"update": 0,
+"values": [Vector2(0.2, 0.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyInfo:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_k4m4r"]
+resource_name = "show"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyInfo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyInfo:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.5, 1.86607, 0.594604),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.21, 0.21), Vector2(0.2, 0.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ghon4"]
+_data = {
+"RESET": SubResource("Animation_qhelb"),
+"show": SubResource("Animation_k4m4r")
+}
+
+[sub_resource type="Animation" id="Animation_u67nu"]
+resource_name = "ready"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:material:shader_parameter/width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qinjo"]
+_data = {
+"ready": SubResource("Animation_u67nu")
+}
+
+[node name="EnemyBase" type="Node2D"]
 script = ExtResource("1_v4x0y")
+attacked = null
+damage_count = null
+enemy_name = null
+health = null
+cost = null
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_hcxh0")
+sprite_frames = SubResource("SpriteFrames_wi6id")
+animation = &"idle"
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(32, 32)
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_p6a1w")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4rs0u")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2bqp3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2odm4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6f0tb")
+
+[node name="EnemyInfo" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -185.0
+offset_right = 128.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(128, 140)
+mouse_filter = 2
+color = Color(0.0588235, 0.0588235, 0.0588235, 0.611765)
+
+[node name="InfoContainer" type="VBoxContainer" parent="EnemyInfo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+metadata/_edit_lock_ = true
+
+[node name="Name" type="Label" parent="EnemyInfo/InfoContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("2_sr26t")
+theme_override_font_sizes/font_size = 27
+text = "Лох-несский рыб"
+autowrap_mode = 2
+
+[node name="WeaknessTitle" type="Label" parent="EnemyInfo/InfoContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("2_sr26t")
+theme_override_font_sizes/font_size = 17
+text = "Слабость"
+autowrap_mode = 2
+
+[node name="WeaknessClass" type="RichTextLabel" parent="EnemyInfo/InfoContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_sr26t")
+theme_override_font_sizes/normal_font_size = 27
+bbcode_enabled = true
+text = "[color=#02aaf5]Оксид"
+
+[node name="HealthBar" parent="EnemyInfo/InfoContainer" instance=ExtResource("3_mu81d")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DamageLabel" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+offset_left = -21.0
+offset_top = 7.0
+offset_right = 19.0
+offset_bottom = 32.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("5_1vvf3")
+theme_override_font_sizes/font_size = 21
+text = "-15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DamageAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimatedSprite")
+libraries = {
+"": SubResource("AnimationLibrary_pts5g")
+}
+
+[node name="ShowDamageLabel" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_efrja")
+}
+
+[node name="ShowInfoAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ghon4")
+}
+
+[node name="ReadyToBeAttackedAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qinjo")
+}
+
+[node name="DamageAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_c8al6")
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]

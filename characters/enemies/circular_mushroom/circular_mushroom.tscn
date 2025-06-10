@@ -1,0 +1,86 @@
+[gd_scene load_steps=14 format=3 uid="uid://cm7m6iqrmtb0v"]
+
+[ext_resource type="PackedScene" uid="uid://b202eutiw3cnl" path="res://characters/enemies/enemy_base.tscn" id="1_nrrpe"]
+[ext_resource type="Script" path="res://characters/enemies/circular_mushroom/circular_mushroom.gd" id="2_hr0tx"]
+[ext_resource type="Texture2D" uid="uid://cqoa1gy3qpril" path="res://characters/enemies/circular_mushroom/sprites/attack/mushroom_attack_1.png" id="2_yjcmn"]
+[ext_resource type="Texture2D" uid="uid://du2qrmxhpa6l6" path="res://characters/enemies/circular_mushroom/sprites/attack/mushroom_attack_2.png" id="3_02n77"]
+[ext_resource type="Texture2D" uid="uid://dgytmosprrom1" path="res://characters/enemies/circular_mushroom/sprites/attack/mushroom_attack_3.png" id="4_vauir"]
+[ext_resource type="Texture2D" uid="uid://copcmqxidb8ho" path="res://characters/enemies/circular_mushroom/sprites/attack/mushroom_attack_4.png" id="5_lnep0"]
+[ext_resource type="Texture2D" uid="uid://dbko4ydg3k8nn" path="res://characters/enemies/circular_mushroom/sprites/attack/mushroom_attack_5.png" id="6_cd6mb"]
+[ext_resource type="Texture2D" uid="uid://dfqn1glldy0f6" path="res://characters/enemies/circular_mushroom/sprites/idle/mushroom_static.png" id="7_pa81k"]
+[ext_resource type="Texture2D" uid="uid://baw1437y5juox" path="res://characters/enemies/circular_mushroom/sprites/leaving/mushroom_leaving_1.png" id="8_66j2t"]
+[ext_resource type="Texture2D" uid="uid://cy04xqt0iw6df" path="res://characters/enemies/circular_mushroom/sprites/leaving/mushroom_leaving_2.png" id="9_03jj0"]
+[ext_resource type="Texture2D" uid="uid://chuiokhxwy1p6" path="res://characters/enemies/circular_mushroom/sprites/leaving/mushroom_leaving_3.png" id="10_s35gd"]
+[ext_resource type="AudioStream" uid="uid://2jyswnnichoj" path="res://characters/enemies/circular_mushroom/audio/attack.wav" id="12_lq061"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lph87"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yjcmn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_02n77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vauir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lnep0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cd6mb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pa81k")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_pa81k")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_pa81k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_66j2t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_03jj0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_s35gd")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"leaving",
+"speed": 9.0
+}]
+
+[node name="CircularMushroom" instance=ExtResource("1_nrrpe")]
+script = ExtResource("2_hr0tx")
+attacked = true
+damage_count = 32
+enemy_name = "Гриб"
+health = 70
+
+[node name="AnimatedSprite" parent="." index="0"]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_lph87")
+
+[node name="Button" parent="." index="1"]
+offset_top = -23.0
+
+[node name="AttackAudio" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource("12_lq061")
+volume_db = 10.0

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbkfe1ihmoxfh"]
+
+[ext_resource type="Script" path="res://unit_tests/reactions/acid/acid.gd" id="1_vo8fs"]
+
+[node name="Acid" type="Node2D"]
+script = ExtResource("1_vo8fs")

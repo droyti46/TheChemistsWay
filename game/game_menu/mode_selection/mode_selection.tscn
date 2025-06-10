@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://cf2bkid7rqybq"]
+
+[ext_resource type="Script" path="res://game/game_menu/mode_selection/mode_selection.gd" id="1_vmlwp"]
+[ext_resource type="Texture2D" uid="uid://c1l5ygdbxbkpd" path="res://game/game_menu/mode_selection/sprites/bg_pattern.png" id="2_ak24k"]
+[ext_resource type="PackedScene" uid="uid://w3oacea3b45" path="res://game/game_menu/pause_menu/paused_button.tscn" id="2_wqmqs"]
+[ext_resource type="PackedScene" uid="uid://siqlnlukawy6" path="res://game/game_menu/mode_selection/assets/game_mode_button.tscn" id="3_oafn7"]
+[ext_resource type="Texture2D" uid="uid://c4wpcf58iw7t3" path="res://game/game_menu/mode_selection/sprites/modes/plot_mode.png" id="4_o36ec"]
+[ext_resource type="Texture2D" uid="uid://d3y2ygsou10c2" path="res://game/game_menu/mode_selection/sprites/modes/roguelike_mode.png" id="5_g7to2"]
+
+[node name="ModeSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vmlwp")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ak24k")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="BackButton" parent="." instance=ExtResource("2_wqmqs")]
+offset_left = 22.0
+offset_top = 21.0
+offset_right = 235.0
+offset_bottom = 61.0
+button_text = "Назад"
+
+[node name="GameModesContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="PlotMode" parent="GameModesContainer" instance=ExtResource("3_oafn7")]
+layout_mode = 2
+mode_name = "Сюжет"
+mode_desc = "Изучи механики игры, с нуля познакомься с неорганической химией и пройди увлекательное приключение"
+mode_image = ExtResource("4_o36ec")
+
+[node name="RoguelikeMode" parent="GameModesContainer" instance=ExtResource("3_oafn7")]
+layout_mode = 2
+mode_name = "Забег"
+mode_desc = "Классическая игра без сюжетных элементов"
+mode_image = ExtResource("5_g7to2")
+
+[connection signal="click" from="BackButton" to="." method="_on_back_button_click"]
+[connection signal="click" from="GameModesContainer/RoguelikeMode" to="." method="_on_roguelike_mode_click"]

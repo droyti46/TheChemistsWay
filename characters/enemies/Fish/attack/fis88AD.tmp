@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpi22a2j54cwn"]
+
+[ext_resource type="PackedScene" uid="uid://b202eutiw3cnl" path="res://characters/enemies/enemy_base.tscn" id="1_i747t"]
+[ext_resource type="Texture2D" uid="uid://b3u3qv7l01xc2" path="res://characters/enemies/Fish/attack/fish_attack.png" id="2_8s2nh"]
+[ext_resource type="Script" path="res://characters/enemies/Fish/attack/fish_attack.gd" id="3_hoa74"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oh0xn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8s2nh")
+}],
+"loop": true,
+"name": &"idle_behind",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8s2nh")
+}],
+"loop": true,
+"name": &"idle_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8s2nh")
+}],
+"loop": true,
+"name": &"idle_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8s2nh")
+}],
+"loop": true,
+"name": &"step_behind",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8s2nh")
+}],
+"loop": true,
+"name": &"step_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8s2nh")
+}],
+"loop": true,
+"name": &"step_side",
+"speed": 5.0
+}]
+
+[node name="FishAttack" instance=ExtResource("1_i747t")]
+sprite_frames = SubResource("SpriteFrames_oh0xn")
+animation = &"step_behind"
+script = ExtResource("3_hoa74")

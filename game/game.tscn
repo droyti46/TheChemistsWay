@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bo3rrvtdtd4wa"]
+
+[ext_resource type="PackedScene" uid="uid://bsb5ucpwuiu7f" path="res://game/game_floor/game_floor.tscn" id="1_3nxr1"]
+[ext_resource type="Script" path="res://game/game.gd" id="1_qk235"]
+[ext_resource type="PackedScene" uid="uid://bw8bs6bmiingd" path="res://game/game_menu/pause_menu/pause_menu.tscn" id="2_7ryxc"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_qk235")
+
+[node name="GameMain" parent="." instance=ExtResource("1_3nxr1")]
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="PauseMenu" instance=ExtResource("2_7ryxc")]
+process_mode = 3

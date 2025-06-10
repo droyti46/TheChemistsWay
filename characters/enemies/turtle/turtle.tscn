@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://be70ugq6d4cb4"]
+
+[ext_resource type="PackedScene" uid="uid://b202eutiw3cnl" path="res://characters/enemies/enemy_base.tscn" id="1_kukk0"]
+[ext_resource type="Texture2D" uid="uid://0c7e12655igd" path="res://characters/enemies/turtle/sprites/naked/turtle_naked_static.png" id="2_dgr5o"]
+[ext_resource type="Script" path="res://characters/enemies/turtle/turtle.gd" id="2_p2bde"]
+[ext_resource type="Texture2D" uid="uid://c8dvqxstwyjsl" path="res://characters/enemies/turtle/sprites/naked/turtle_naked_step.png" id="3_ln7af"]
+[ext_resource type="Texture2D" uid="uid://l6cvg8gf5mwt" path="res://characters/enemies/turtle/sprites/shell/turtle_static.png" id="4_ao8y1"]
+[ext_resource type="Texture2D" uid="uid://cdiqpyaclthkm" path="res://characters/enemies/turtle/sprites/shell/turtle_step.png" id="5_ni5tt"]
+[ext_resource type="AudioStream" uid="uid://dpqqovoom4psy" path="res://characters/enemies/turtle/sounds/breath.mp3" id="7_sju0o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xqhmt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dgr5o")
+}],
+"loop": true,
+"name": &"naked_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dgr5o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ln7af")
+}],
+"loop": true,
+"name": &"naked_step",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ao8y1")
+}],
+"loop": true,
+"name": &"shell_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ao8y1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ni5tt")
+}],
+"loop": true,
+"name": &"shell_step",
+"speed": 5.0
+}]
+
+[node name="EnemyBase" instance=ExtResource("1_kukk0")]
+script = ExtResource("2_p2bde")
+attacked = true
+damage_count = 30
+enemy_name = "Черепашка"
+health = 43
+cost = 2.0
+
+[node name="AnimatedSprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_xqhmt")
+animation = &"shell_idle"
+frame_progress = 0.720511
+
+[node name="BreathAudio" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource("7_sju0o")

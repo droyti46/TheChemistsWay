@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn1n2g5f3qe64"]
+
+[ext_resource type="PackedScene" uid="uid://b7hsf3hjuadxy" path="res://game/game_floor/dungeon_generator/rooms_templates/chapter1_forest/forest_room_base.tscn" id="1_evyq7"]
+[ext_resource type="PackedScene" uid="uid://chkdin6rrkcl" path="res://game/game_floor/dungeon_generator/rooms_templates/chest/chest.tscn" id="2_jh3pf"]
+
+[node name="RoomBase" instance=ExtResource("1_evyq7")]
+room_type = 2
+
+[node name="Chest" parent="." index="1" instance=ExtResource("2_jh3pf")]
+position = Vector2(174.75, 99)

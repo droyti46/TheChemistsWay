@@ -1,12 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhvmkddx2sdfn"]
+[gd_scene load_steps=14 format=3 uid="uid://bhvmkddx2sdfn"]
 
 [ext_resource type="PackedScene" uid="uid://c01a66ufjqjo2" path="res://characters/players/player_base.tscn" id="1_n6wql"]
 [ext_resource type="Script" path="res://characters/players/tony/tony.gd" id="2_k3v2w"]
 [ext_resource type="Texture2D" uid="uid://d4mdf812sv0j0" path="res://characters/players/tony/sprites/side/craft/craft_side.png" id="3_n37v6"]
 [ext_resource type="Texture2D" uid="uid://dqqegmem1gonw" path="res://characters/players/tony/sprites/behind/idle/idle_behind.png" id="4_kn2rt"]
-[ext_resource type="Texture2D" uid="uid://dlq0bt3cruy1p" path="res://characters/players/tony/sprites/side/idle/idle_side.png" id="5_7msvy"]
+[ext_resource type="Texture2D" uid="uid://cvb57w40gwqtq" path="res://characters/players/caroline/sprites/side/idle/idle_side.png" id="5_8j0dd"]
+[ext_resource type="Texture2D" uid="uid://cpg76u2tourdt" path="res://characters/players/tony/sprites/side/idle/idle_side1.png" id="5_63rxt"]
+[ext_resource type="Texture2D" uid="uid://dlq0bt3cruy1p" path="res://characters/players/tony/sprites/side/idle/idle_side2.png" id="6_gkms7"]
 [ext_resource type="Texture2D" uid="uid://dnp8cth0to1v8" path="res://characters/players/tony/sprites/behind/step/step_behind1.png" id="6_n3kww"]
 [ext_resource type="Texture2D" uid="uid://c5x4vubolo0j8" path="res://characters/players/tony/sprites/behind/step/step_behind2.png" id="7_hsvhd"]
+[ext_resource type="Texture2D" uid="uid://c1ldmevrg7l4c" path="res://characters/players/tony/sprites/side/idle/idle_side3.png" id="7_kee6q"]
 [ext_resource type="Texture2D" uid="uid://o02f4a8xo820" path="res://characters/players/tony/sprites/side/step/step_side1.png" id="8_bpdg7"]
 [ext_resource type="Texture2D" uid="uid://chadpcu2nr32m" path="res://characters/players/tony/sprites/side/step/step_side2.png" id="9_qp1kp"]
 
@@ -14,11 +17,19 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("4_kn2rt")
+}],
+"loop": false,
+"name": &"craft_behind",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("3_n37v6")
 }],
-"loop": true,
+"loop": false,
 "name": &"craft_side",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -30,11 +41,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_7msvy")
+"texture": ExtResource("5_63rxt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gkms7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kee6q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gkms7")
 }],
 "loop": true,
 "name": &"idle_side",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -64,8 +84,15 @@ collision_mask = 14
 script = ExtResource("2_k3v2w")
 
 [node name="AnimatedSprite" parent="." index="0"]
+position = Vector2(-1, 0)
 sprite_frames = SubResource("SpriteFrames_akkvu")
-frame_progress = 0.0
+animation = &"craft_side"
+frame_progress = 1.0
 
-[node name="Collision" parent="." index="1"]
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+visible = false
+position = Vector2(-1, -2)
+texture = ExtResource("5_8j0dd")
+
+[node name="Collision" parent="." index="2"]
 position = Vector2(1, -2)

@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsb5ucpwuiu7f"]
+
+[ext_resource type="Script" path="res://game/game_floor/game_floor.gd" id="1_br8uf"]
+[ext_resource type="PackedScene" uid="uid://s1biukiv8luv" path="res://game/game_floor/ui/ui.tscn" id="2_4r87o"]
+[ext_resource type="FontFile" uid="uid://cv3gxgpg1oea3" path="res://resources/fonts/bold.ttf" id="3_po6px"]
+[ext_resource type="Script" path="res://game/game_floor/dungeon_generator/dungeon_generator.gd" id="4_fa008"]
+[ext_resource type="Script" path="res://game/game_floor/dungeon_generator/dungeon_builder.gd" id="5_qefnb"]
+
+[sub_resource type="Animation" id="Animation_d3cmm"]
+resource_name = "show"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l778p"]
+_data = {
+"show": SubResource("Animation_d3cmm")
+}
+
+[node name="GameMain" type="Node2D"]
+script = ExtResource("1_br8uf")
+
+[node name="Grass" type="ColorRect" parent="."]
+offset_left = -11102.0
+offset_top = -7078.0
+offset_right = 16536.0
+offset_bottom = 11123.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="UICanvas" type="CanvasLayer" parent="."]
+
+[node name="Ui" parent="UICanvas" instance=ExtResource("2_4r87o")]
+unique_name_in_owner = true
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="EndGame" type="ColorRect" parent="UICanvas"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="UICanvas/EndGame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_right = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_po6px")
+theme_override_font_sizes/font_size = 36
+text = "Спасибо за игру в бету 🧪❤️
+Надеюсь вы оценили работу команды на конкурс \"Начни игру\"
+
+Над проектом работали:
+Никита Бакутов (droyri) - программист, геймдизайнер
+Софья (AAstatine) - 2D художник
+Данил - композитор"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Show" type="AnimationPlayer" parent="UICanvas/EndGame"]
+libraries = {
+"": SubResource("AnimationLibrary_l778p")
+}
+
+[node name="DungeonGenerator" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_fa008")
+
+[node name="DungeonBuilder" type="Node" parent="." node_paths=PackedStringArray("dungeon_node")]
+unique_name_in_owner = true
+script = ExtResource("5_qefnb")
+dungeon_node = NodePath("../Rooms")
+
+[node name="Rooms" type="Node2D" parent="."]
+y_sort_enabled = true

@@ -1,0 +1,138 @@
+[gd_scene load_steps=10 format=3 uid="uid://bw8bs6bmiingd"]
+
+[ext_resource type="Script" path="res://game/game_menu/pause_menu/pause_menu.gd" id="1_n7b6k"]
+[ext_resource type="Texture2D" uid="uid://by3w4w6ehhw2m" path="res://resources/sprites/logos/ru_logo.png" id="1_skoxb"]
+[ext_resource type="PackedScene" uid="uid://w3oacea3b45" path="res://game/game_menu/pause_menu/paused_button.tscn" id="2_enghp"]
+[ext_resource type="Shader" path="res://game/game_menu/pause_menu/pause_menu.gdshader" id="2_j445s"]
+[ext_resource type="AudioStream" uid="uid://cws2d8yxix1wr" path="res://game/game_menu/pause_menu/open_pause.wav" id="5_1rwep"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_340pk"]
+shader = ExtResource("2_j445s")
+shader_parameter/percent = 0.0
+
+[sub_resource type="Animation" id="Animation_krv7q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shader:material:shader_parameter/percent")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_6huho"]
+resource_name = "show"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shader:material:shader_parameter/percent")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yp00k"]
+_data = {
+"RESET": SubResource("Animation_krv7q"),
+"show": SubResource("Animation_6huho")
+}
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_n7b6k")
+
+[node name="Shader" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_340pk")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Menu" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.055
+anchor_right = 0.319
+anchor_bottom = 1.0
+offset_left = -0.360004
+offset_right = 0.511993
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0509804, 0.0784314, 0.0352941, 1)
+
+[node name="Logo" type="TextureRect" parent="Menu"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 122.0
+offset_bottom = 243.0
+grow_horizontal = 2
+pivot_offset = Vector2(200, 0)
+texture = ExtResource("1_skoxb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginButtons" type="MarginContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 232.0
+offset_bottom = -112.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="Menu/MarginButtons"]
+layout_mode = 2
+theme_override_constants/separation = 13
+alignment = 1
+
+[node name="ContinueButton" parent="Menu/MarginButtons/ButtonsContainer" instance=ExtResource("2_enghp")]
+layout_mode = 2
+button_text = "Продолжить"
+
+[node name="SettingsButton" parent="Menu/MarginButtons/ButtonsContainer" instance=ExtResource("2_enghp")]
+layout_mode = 2
+button_text = "Настройки"
+
+[node name="GuideButton" parent="Menu/MarginButtons/ButtonsContainer" instance=ExtResource("2_enghp")]
+layout_mode = 2
+button_text = "Справочник"
+
+[node name="ExitButton" parent="Menu/MarginButtons/ButtonsContainer" instance=ExtResource("2_enghp")]
+layout_mode = 2
+button_text = "Выйти в меню"
+
+[node name="ShowAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yp00k")
+}
+
+[node name="ShowPauseAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_1rwep")
+volume_db = 10.0
+
+[connection signal="click" from="Menu/MarginButtons/ButtonsContainer/ContinueButton" to="." method="_on_continue_button_click"]
+[connection signal="click" from="Menu/MarginButtons/ButtonsContainer/ExitButton" to="." method="_on_exit_button_click"]

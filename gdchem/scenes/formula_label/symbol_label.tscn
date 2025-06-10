@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmdnjq37xmfcl"]
+
+[ext_resource type="FontFile" uid="uid://cv3gxgpg1oea3" path="res://resources/fonts/bold.ttf" id="1_3q1kp"]
+
+[node name="SymbolLabel" type="Label"]
+custom_minimum_size = Vector2(0, 65)
+offset_right = 62.0
+offset_bottom = 157.0
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 40
+theme_override_fonts/font = ExtResource("1_3q1kp")
+theme_override_font_sizes/font_size = 91
+text = "H"

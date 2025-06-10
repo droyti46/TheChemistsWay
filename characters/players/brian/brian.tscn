@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://yxtpyj8i6k47"]
 
 [ext_resource type="PackedScene" uid="uid://c01a66ufjqjo2" path="res://characters/players/player_base.tscn" id="1_3gdiy"]
-[ext_resource type="Texture2D" uid="uid://osi7bwo52glc" path="res://characters/players/brian/sprites/idle/idle.png" id="2_s1l0s"]
+[ext_resource type="Texture2D" uid="uid://osi7bwo52glc" path="res://characters/players/brian/sprites/side/idle/idle_side.png" id="2_s1l0s"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h571p"]
 animations = [{

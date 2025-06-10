@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfkoof5h4jac6"]
+
+[ext_resource type="Texture2D" uid="uid://bi53610p7obqj" path="res://characters/players/sprites/health_bar/under.png" id="1_0o7ng"]
+[ext_resource type="Texture2D" uid="uid://c2bs62udgauc6" path="res://characters/players/sprites/health_bar/over.png" id="2_vfl22"]
+[ext_resource type="Texture2D" uid="uid://6ts6t2ce53yw" path="res://characters/players/sprites/health_bar/progress.png" id="3_b2o80"]
+[ext_resource type="Script" path="res://scenes/health_bar.gd" id="4_lxflc"]
+[ext_resource type="FontFile" uid="uid://cv3gxgpg1oea3" path="res://resources/fonts/bold.ttf" id="4_xe0nc"]
+
+[node name="HealthBar" type="TextureProgressBar"]
+custom_minimum_size = Vector2(0, 64)
+offset_right = 183.0
+offset_bottom = 64.0
+max_value = 124.0
+value = 124.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_0o7ng")
+texture_over = ExtResource("2_vfl22")
+texture_progress = ExtResource("3_b2o80")
+script = ExtResource("4_lxflc")
+
+[node name="HealthLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 13
+theme_override_fonts/font = ExtResource("4_xe0nc")
+text = "124/124"
+horizontal_alignment = 1
+vertical_alignment = 1

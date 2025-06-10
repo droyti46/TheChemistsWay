@@ -1,0 +1,575 @@
+[gd_scene load_steps=23 format=3 uid="uid://s1biukiv8luv"]
+
+[ext_resource type="Script" path="res://game/game_floor/ui/ui.gd" id="1_4q8rn"]
+[ext_resource type="Texture2D" uid="uid://dvx2h753yf5dg" path="res://characters/players/tony/sprites/icon/char_icon.png" id="2_0yri2"]
+[ext_resource type="PackedScene" uid="uid://b8bntr5jgfx7p" path="res://game/game_floor/ui/mini_map/mini_map.tscn" id="2_a26m3"]
+[ext_resource type="Texture2D" uid="uid://dl520nxrxp1l3" path="res://characters/players/sprites/icon_frame.png" id="3_sqdl7"]
+[ext_resource type="FontFile" uid="uid://cv3gxgpg1oea3" path="res://resources/fonts/bold.ttf" id="4_2ii0t"]
+[ext_resource type="PackedScene" uid="uid://cfkoof5h4jac6" path="res://scenes/health_bar.tscn" id="4_mvdij"]
+[ext_resource type="AudioStream" uid="uid://bctgr5t6qxjuj" path="res://game/game_floor/ui/resources/audio/new_substance.wav" id="4_oi0pb"]
+[ext_resource type="PackedScene" uid="uid://dwtv1wgrbcepk" path="res://gdchem/scenes/game_substance.tscn" id="7_uw21w"]
+[ext_resource type="FontFile" uid="uid://brc5jgbnpo03o" path="res://resources/fonts/pixel.ttf" id="9_yem8a"]
+[ext_resource type="AudioStream" uid="uid://j8gkl6vl8fuo" path="res://game/game_floor/ui/sounds/fight_started2.wav" id="10_8a56x"]
+[ext_resource type="AudioStream" uid="uid://ckoo1dm8j4sb3" path="res://game/game_floor/ui/sounds/win.wav" id="11_kbwsi"]
+[ext_resource type="PackedScene" uid="uid://b6vnkkru1bpy3" path="res://game/game_menu/death_screen/death_screen.tscn" id="13_4qfkp"]
+
+[sub_resource type="Animation" id="Animation_7mxac"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_csc13"]
+resource_name = "player_moves_are_over"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CountMovesLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.517632, 2.37841),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -70)]
+}
+
+[sub_resource type="Animation" id="Animation_e4hs3"]
+resource_name = "reduce_moves"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CountMovesLabel:theme_override_font_sizes/font_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.615572, 1.7411, 0.707107),
+"update": 2,
+"values": [31, 35, 31]
+}
+
+[sub_resource type="Animation" id="Animation_5n4os"]
+resource_name = "show_fight"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CountMovesLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.659754, 1.56917),
+"update": 0,
+"values": [Vector2(0, -70), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewportContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.594604, 2.2974),
+"update": 0,
+"values": [Vector2(897, 38), Vector2(1300, 38)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LevelLabel:theme_override_font_sizes/font_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [21, 1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LevelLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k1v04"]
+_data = {
+"RESET": SubResource("Animation_7mxac"),
+"player_moves_are_over": SubResource("Animation_csc13"),
+"reduce_moves": SubResource("Animation_e4hs3"),
+"show_fight": SubResource("Animation_5n4os")
+}
+
+[sub_resource type="Animation" id="Animation_v6pnn"]
+resource_name = "update"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_font_sizes/font_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.535887, 1.8025, 0.554785),
+"update": 0,
+"values": [24, 40, 24]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pfvgk"]
+_data = {
+"update": SubResource("Animation_v6pnn")
+}
+
+[sub_resource type="Animation" id="Animation_2f106"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%FightMessageLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_labyo"]
+resource_name = "on"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BG:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BG:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 1.8, 2),
+"transitions": PackedFloat32Array(1, 0.68302, 1.36604, 1, 1),
+"update": 0,
+"values": [0.0, 1.2, 1.0, 1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FightMessageLabel:theme_override_font_sizes/font_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 1.8, 2),
+"transitions": PackedFloat32Array(1, 0.68302, 1.41421, 1, 1),
+"update": 2,
+"values": [1, 80, 71, 71, 1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%FightMessageLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0l6dp"]
+_data = {
+"RESET": SubResource("Animation_2f106"),
+"on": SubResource("Animation_labyo")
+}
+
+[node name="Ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4q8rn")
+
+[node name="Icon" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 25.0
+offset_top = 17.0
+offset_right = 130.0
+offset_bottom = 122.0
+mouse_filter = 2
+
+[node name="CharacterIcon" type="TextureRect" parent="Icon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0yri2")
+expand_mode = 1
+stretch_mode = 6
+metadata/_edit_lock_ = true
+
+[node name="Frame" type="TextureRect" parent="Icon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_sqdl7")
+metadata/_edit_lock_ = true
+
+[node name="AbilitiesControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="HealthBar" parent="." instance=ExtResource("4_mvdij")]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 17.0
+offset_right = 325.0
+offset_bottom = 81.0
+mouse_filter = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_left = 897.0
+offset_top = 38.0
+offset_right = 1097.0
+offset_bottom = 238.0
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="MiniMapBG" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 300.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.0588235, 0.0588235, 0.54902)
+
+[node name="MiniMap" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_a26m3")]
+
+[node name="LevelLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 898.0
+offset_top = 242.0
+offset_right = 1098.0
+offset_bottom = 268.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("9_yem8a")
+theme_override_font_sizes/font_size = 21
+text = "этаж 1-1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountMovesLabel" type="Label" parent="."]
+layout_mode = 0
+offset_top = -70.0
+offset_right = 1152.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 17
+theme_override_fonts/font = ExtResource("4_2ii0t")
+theme_override_font_sizes/font_size = 31
+text = "Осталось ходов: 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FightAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_k1v04")
+}
+
+[node name="InventoryCountLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 189.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("4_2ii0t")
+theme_override_font_sizes/font_size = 24
+text = "0/12"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Animation" type="AnimationPlayer" parent="InventoryCountLabel"]
+libraries = {
+"": SubResource("AnimationLibrary_pfvgk")
+}
+
+[node name="SubstancesContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -85.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = -5
+alignment = 1
+
+[node name="GameSubstance" parent="SubstancesContainer" instance=ExtResource("7_uw21w")]
+visible = false
+layout_mode = 2
+
+[node name="GameSubstance2" parent="SubstancesContainer" instance=ExtResource("7_uw21w")]
+visible = false
+layout_mode = 2
+
+[node name="GameSubstance3" parent="SubstancesContainer" instance=ExtResource("7_uw21w")]
+visible = false
+layout_mode = 2
+
+[node name="GameSubstance4" parent="SubstancesContainer" instance=ExtResource("7_uw21w")]
+visible = false
+layout_mode = 2
+
+[node name="GameSubstance5" parent="SubstancesContainer" instance=ExtResource("7_uw21w")]
+visible = false
+layout_mode = 2
+
+[node name="GameSubstance6" parent="SubstancesContainer" instance=ExtResource("7_uw21w")]
+visible = false
+layout_mode = 2
+
+[node name="GameSubstance7" parent="SubstancesContainer" instance=ExtResource("7_uw21w")]
+visible = false
+layout_mode = 2
+
+[node name="GameSubstance8" parent="SubstancesContainer" instance=ExtResource("7_uw21w")]
+visible = false
+layout_mode = 2
+
+[node name="GameSubstance9" parent="SubstancesContainer" instance=ExtResource("7_uw21w")]
+visible = false
+layout_mode = 2
+
+[node name="GameSubstance10" parent="SubstancesContainer" instance=ExtResource("7_uw21w")]
+visible = false
+layout_mode = 2
+
+[node name="GameSubstance11" parent="SubstancesContainer" instance=ExtResource("7_uw21w")]
+visible = false
+layout_mode = 2
+
+[node name="GameSubstance12" parent="SubstancesContainer" instance=ExtResource("7_uw21w")]
+visible = false
+layout_mode = 2
+
+[node name="ReactionBG" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -381.0
+offset_top = -203.0
+offset_right = 369.0
+offset_bottom = -114.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0.129412, 0.129412, 0.129412, 0.745098)
+
+[node name="ReactionLabel" type="RichTextLabel" parent="ReactionBG"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+offset_left = 25.0
+offset_top = 17.0
+offset_right = 724.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("4_2ii0t")
+theme_override_font_sizes/normal_font_size = 17
+bbcode_enabled = true
+text = "[center]H2 + O2 -> H2O"
+autowrap_mode = 2
+
+[node name="NewSubstancePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_oi0pb")
+
+[node name="MessageLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 192.0
+offset_bottom = 391.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_2ii0t")
+theme_override_font_sizes/font_size = 31
+text = "Инвентарь переполнен. Используйте вещества"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="FightMessage" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 182.0
+offset_bottom = 314.0
+grow_horizontal = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="BG" type="ColorRect" parent="FightMessage"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1e-05)
+pivot_offset = Vector2(576, 66)
+mouse_filter = 2
+color = Color(0, 0, 0, 0.615686)
+
+[node name="FightMessageLabel" type="Label" parent="FightMessage"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_yem8a")
+theme_override_font_sizes/font_size = 1
+text = "Бой начался"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Animation" type="AnimationPlayer" parent="FightMessage"]
+libraries = {
+"": SubResource("AnimationLibrary_0l6dp")
+}
+
+[node name="FightStartedAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_8a56x")
+
+[node name="WinAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_kbwsi")
+
+[node name="DeathScreen" parent="." instance=ExtResource("13_4qfkp")]
+process_mode = 3
+visible = false
+layout_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.615686)
+
+[node name="SortSubstances" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -136.0
+offset_right = -23.0
+offset_bottom = -19.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="SortSubstancesContent" type="VBoxContainer" parent="SortSubstances"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="SortSubstances/SortSubstancesContent"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 13
+theme_override_fonts/font = ExtResource("9_yem8a")
+text = "Сортировка"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="SortSubstances/SortSubstancesContent"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("9_yem8a")
+theme_override_font_sizes/font_size = 31
+text = "Класс"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="SortSubstances/SortSubstancesContent"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("9_yem8a")
+theme_override_font_sizes/font_size = 31
+text = "Урон"
+horizontal_alignment = 1
+vertical_alignment = 1

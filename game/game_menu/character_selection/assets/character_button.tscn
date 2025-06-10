@@ -1,0 +1,214 @@
+[gd_scene load_steps=15 format=3 uid="uid://c7rx5sq7hf5lh"]
+
+[ext_resource type="Texture2D" uid="uid://dlq0bt3cruy1p" path="res://characters/players/tony/sprites/side/idle/idle_side2.png" id="1_7lnup"]
+[ext_resource type="Script" path="res://game/game_menu/character_selection/assets/character_button.gd" id="1_l5p1b"]
+[ext_resource type="FontFile" uid="uid://brc5jgbnpo03o" path="res://resources/fonts/pixel.ttf" id="3_rublg"]
+[ext_resource type="AudioStream" uid="uid://bvljajks5lttm" path="res://game/game_menu/character_selection/resources/audio/hover.wav" id="4_5vdli"]
+
+[sub_resource type="Gradient" id="Gradient_qm01q"]
+colors = PackedColorArray(0, 0.0937725, 0.0977375, 1, 0.0110876, 0.0110876, 0.0110876, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lv7nv"]
+gradient = SubResource("Gradient_qm01q")
+fill_from = Vector2(0.440171, 0)
+fill_to = Vector2(0.470085, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_chf1h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b102d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3xmwi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8axd1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_43jtf"]
+
+[sub_resource type="Animation" id="Animation_fgagj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterImage:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterImage:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 22.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterName:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CharacterName:theme_override_font_sizes/font_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15]
+}
+
+[sub_resource type="Animation" id="Animation_pd12j"]
+resource_name = "hover"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterImage:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1.2, 1.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterImage:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 22.5), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterName:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0.65098, 0.666667, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CharacterName:theme_override_font_sizes/font_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 2,
+"values": [15, 20]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_chlyd"]
+_data = {
+"RESET": SubResource("Animation_fgagj"),
+"hover": SubResource("Animation_pd12j")
+}
+
+[node name="CharacterButton" type="Control"]
+custom_minimum_size = Vector2(100, 145)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1052.0
+offset_bottom = -503.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_l5p1b")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lv7nv")
+
+[node name="CharacterImage" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 22.5
+offset_right = 100.0
+offset_bottom = 122.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(50, 50)
+texture = ExtResource("1_7lnup")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_chf1h")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_b102d")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_3xmwi")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8axd1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_43jtf")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_chlyd")
+}
+
+[node name="CharacterName" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_rublg")
+theme_override_font_sizes/font_size = 15
+text = "Тони"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HoverAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5vdli")
+volume_db = 10.0
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
